@@ -1,0 +1,35 @@
+useDynLib("FLRP")
+import("FLCore")	
+import("ggplotFL")
+importFrom("methods",
+  "as",
+  "callNextMethod",
+  "getSlots",
+  "is",
+  "new",
+  "slot",
+  "slot<-",
+  "validObject")
+importFrom("graphics",
+  "lines", 
+  "par", 
+  "points", 
+  "polygon")
+importFrom("stats",
+  "acf",
+  "coefficients",
+  "fft",
+  "formula",
+  "hat",
+  "lm",
+  "optimise",
+  "qqnorm",
+  "rstandard",
+  "runif", 
+  "spline")
+importFrom("utils",
+  "read.csv",
+  "unstack")
+exportClasses(
+  "FLBRP",
+  "FLBRPs")
