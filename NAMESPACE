@@ -33,3 +33,24 @@ importFrom("utils",
 exportClasses(
   "FLBRP",
   "FLBRPs")
+exportMethods(
+  "biomass.obs",
+  "bmsy",
+  "brp",
+  "catch.n",
+  "catch.obs",
+  "catch.sel",
+  "catch.wt",
+  "discards.n",
+  "FLBRP",
+  "fmsy",
+  "hcrYield",
+  "iter",
+  "landings.n",
+  "msy",
+  "propagate",
+  "sbmsy",
+  "stock.n",
+  "yield.obs",
+  "ypr"
+)

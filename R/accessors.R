@@ -2,8 +2,7 @@
 # FLRP/R/accessors.R
 
 # Copyright European Union, 2017
-# Authors: Laurie Kell <laurie@kell.es>
-#          Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>
+# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>
 #
 # Distributed under the terms of the GNU Public License v 3.0
 
@@ -59,5 +58,4 @@ createFLAccesors <- function(class, exclude=character(1), include=missing) {
 	}
 	return(defined)} # }}}
 
-# FLBRP
-invisible(createFLAccesors("FLBRP", exclude=c("range","name","desc")))
+invisible(createFLAccesors("FLBRP", exclude=c("range", "name", "desc", "refpts")))

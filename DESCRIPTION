@@ -19,9 +19,14 @@ Imports:
 Collate:
   classes.R
   generics.R
-  constructors.R
   accessors.R
+  constructors.R
+  methods.R
+  coerce.R
+  refpts.R
+  utilities.R
 Additional_repositories: http://flr-project.org/R
 License: GPL-3
 LazyLoad: Yes
 LazyData: No
+RoxygenNote: 6.0.1

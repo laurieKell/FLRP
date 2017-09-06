@@ -1,7 +1,7 @@
 # classes.R - FLBRP and FLBRPs classes
 # FLRP/R/classes.R
 
-# Copyright European Union, 2017
+# Copyright FLR Team, 2017
 # Authors: Laurie Kell <laurie@kell.es>
 #          Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>
 #          Finlay Scott (EC JRC) <finlay.scott@ec.europa.eu>
@@ -35,6 +35,87 @@ validFLBRP <- function(object){
   return(TRUE)
 }
 
+#' The FLR class for biological and economic reference points
+#'
+#' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend
+#' odio ac rutrum luctus. Aenean placerat porttitor commodo. Pellentesque eget porta
+#' libero. Pellentesque molestie mi sed orci feugiat, non mollis enim tristique. 
+#' Suspendisse eu sapien vitae arcu lobortis ultrices vitae ac velit. Curabitur id 
+#' 
+#' @name FLBRP
+#' @rdname FLBRP
+#' @docType class
+#' @aliases FLBRP FLBRP-methods FLBRP-class
+#'
+#' @slot model The formula for the stock-recruitment model, `formula,`.
+#' @slot params Parameters of the stock-recruitment relationship, `FLPar,`.
+#' @slot refpts The estimated reference points, `FLPar,`.
+#' @slot fbar A vector of mean fishing mortality values for calculating the reference points, `FLQuant,`.
+#' @slot fbar.obs The time series of observed mean fishing mortality, `FLQuant,`.
+#' @slot landings.obs The time series of observed total landings, `FLQuant,`.
+#' @slot discards.obs The time series of observed total discards, `FLQuant,`.
+#' @slot rec.obs The time series of observed recruitment, `FLQuant,`.
+#' @slot ssb.obs The time series of observed spawning stock biomasses, `FLQuant,`.
+#' @slot stock.obs The time series of observed total stock abundance, `FLQuant,`.
+#' @slot profit.obs The time series of profits, `FLQuant,`.
+#' @slot landings.sel Selectivity at age for the landings, `FLQuant,`.
+#' @slot discards.sel Selectivity at age for the discards, `FLQuant,`.
+#' @slot bycatch.harvest X, Fishing mortality at age of bycatch species, `FLQuant,`.
+#' @slot stock.wt Mean weight-at-age in the stock to use in calculations, `FLQuant,`.
+#' @slot landings.wt Mean weight-at-age in the landings to use in calculations, `FLQuant,`.
+#' @slot discards.wt Mean weight-at-age in the discards to use in calculations, `FLQuant,`.
+#' @slot bycatch.wt Mean weight-at-age in the bycatch to use in calculations, `FLQuant,`.
+#' @slot m Natural mortality at age, `FLQuant,`.
+#' @slot mat Maturity at age, `FLQuant,`.
+#' @slot harvest.spwn Proportion of harvest/fishing mortality before spawning, `FLQuant,`.
+#' @slot m.spwn Proportion of natural mortality before spawning, `FLQuant,`.
+#' @slot availability , `FLQuant,`.
+#' @slot price Price at age, `FLQuant,`.
+#' @slot vcost X, `FLQuant,`.
+#' @slot fcost X, `FLQuant,`.
+#'
+#' @section Validity:
+#'
+#'   \describe{
+#'     \item{VALIDITY}{Neque porro quisquam est qui dolorem ipsum.}
+#' }
+#'
+#' You can inspect the class validity function by using
+#'    \code{getValidity(getClassDef('FLBRP'))}
+#'
+#' @section Accessors:
+#' All slots in the class have accessor and replacement methods defined that
+#' allow retrieving and substituting individual slots.
+#'
+#' The values passed for replacement need to be of the class of that slot.
+#' A numeric vector can also be used when replacing FLQuant slots, and the
+#' vector will be used to substitute the values in the slot, but not its other
+#' attributes.
+#'
+#' @section Constructor:
+#' A construction method exists for this class that can take named arguments for
+#' any of its slots. All slots are then created to match the requirements of the
+#' class validity. If an unnamed \code{FLQuant} object is provided, this is used
+#' for sizing but not stored in any slot.
+#' 
+#' A standard method also exists for object of class \code{FLStock}, with or
+#' without additional information on the stock-recruits relationship. This can
+#' be provided as an object of class \code{FLSR}, one of class \code{predictModel}
+#' or as a list wqith elements named 'params', of class \code{FLPar}, and 'model',
+#' of class \code{formula}.
+#'
+#' @section Methods:
+#' Methods exist for various calculations based on values stored in the class:
+#'
+#' \describe{
+#'     \item{METHOD}{Neque porro quisquam est qui dolorem ipsum.}
+#' }
+#'
+#' @author The FLR Team
+#' @seealso \link{FLComp} \link{FLStock} \link{FLSR} \link{brp}
+#' @keywords classes
+#' @examples
+#'
 setClass("FLBRP",
   contains="FLComp",
   representation(
