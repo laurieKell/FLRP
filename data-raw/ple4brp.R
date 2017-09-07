@@ -17,6 +17,6 @@ ple4sr <- fmle(as.FLSR(ple4, model="bevholt"))
 ple4brp <- FLBRP(ple4, sr=ple4sr, fbar=FLQuant(seq(0, 3, length=101)),
   price=FLQuant(1.50, dimnames=list(age=1:10)))
 
-pl4brp <- brp(ple4brp)
+ple4brp <- brp(ple4brp)
 
 save(ple4brp, file="../data/ple4brp.RData", compress="xz")
