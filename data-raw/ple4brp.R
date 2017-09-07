@@ -17,6 +17,17 @@ ple4sr <- fmle(as.FLSR(ple4, model="bevholt"))
 ple4brp <- FLBRP(ple4, sr=ple4sr, fbar=FLQuant(seq(0, 3, length=101)),
   price=FLQuant(1.50, dimnames=list(age=1:10)))
 
+# ECONOMIC data
+
+price(ple4brp) <- c(rep(1.15,3),rep(1.3,2),rep(1.55,5)) * 1000
+units(price(ple4brp)) <- "euro / t"
+
+vcost(ple4brp) <- 70000 * 1000
+units(vcost(ple4brp)) <- "euro / effort"
+
+fcost(ple4brp) <- 35000 * 1000
+units(fcost(ple4brp)) <- "euro / effort"
+
 ple4brp <- brp(ple4brp)
 
 save(ple4brp, file="../data/ple4brp.RData", compress="xz")
