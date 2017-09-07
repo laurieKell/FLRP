@@ -1,0 +1,7 @@
+^.travis.yml$
+appveyor.yml
+NEWS.md
+^Makefile$
+docs
+.git/
+^_pkgdown.yml$
