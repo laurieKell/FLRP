@@ -69,7 +69,16 @@ setMethod("summary", signature("FLBRP"),
     callNextMethod()
     cat("\n")
 
+    # model
+    cat("Model: \t")
+    print(model(object), showEnv=FALSE)
+    
+    # params
+    print(params(object), reduced=TRUE)
+
+    # refpts flag
+    cat("\n")
     flag <- !all(is.na(refpts(object)))
-    cat("refpts: ", ifelse(flag, "Calculated", "NA"), "\n")
+    cat("refpts: ", ifelse(flag, "calculated", "NA"), "\n")
   }
 ) # }}}

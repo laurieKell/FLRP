@@ -230,3 +230,63 @@ setMethod('hcrYield', signature(object='FLBRP', fbar='numeric'),
   function(object, fbar)
     hcrYield(object, FLQuant(fbar)))
 # }}}
+
+# ssb {{{
+setMethod('ssb', signature(object='FLBRP'),
+  function(object) {
+
+    f <- harvest(object) %*% harvest.spwn(object)
+    m <- m(object) %*% m.spwn(object)
+    
+    expZ <- exp(-f %-% m)
+
+    res <- quantSums(stock.n(object) %*% expZ %*% stock.wt(object) %*%
+      mat(object))
+
+    return(res)
+  }
+)# }}}
+
+# landings {{{
+setMethod('landings', signature(object='FLBRP'),
+  function(object){
+    return(quantSums(landings.n(object) %*% landings.wt(object)))
+  }
+) # }}}
+
+# discards {{{
+setMethod('discards', signature(object='FLBRP'),
+  function(object) {
+    return(quantSums(discards.n(object) %*% discards.wt(object)))
+  }
+) # }}}
+
+# catch {{{
+setMethod('catch', signature(object='FLBRP'),
+  function(object) {
+    return(landings(object) + discards(object))
+  }
+) # }}}
+
+# revenue {{{
+setMethod('revenue', signature(object='FLBRP'),
+  function(object) {
+    return(quantSums(landings.n(object) %*% landings.wt(object) %*% price(object)))
+  }
+) # }}}
+
+# cost {{{
+setMethod('cost', signature(object='FLBRP'),
+  function(object){
+    return(quantSums((fbar(object) %*% vcost(object)) %+% fcost(object)))
+  }
+) # }}}
+
+# profit {{{
+setMethod('profit', signature(object='FLBRP'),
+  function(object) {
+    return(revenue(object) - cost(object))
+  }
+) # }}}
+
+
