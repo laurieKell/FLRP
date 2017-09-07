@@ -37,10 +37,17 @@ validFLBRP <- function(object){
 
 #' The FLR class for biological and economic reference points
 #'
-#' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend
-#' odio ac rutrum luctus. Aenean placerat porttitor commodo. Pellentesque eget porta
-#' libero. Pellentesque molestie mi sed orci feugiat, non mollis enim tristique. 
-#' Suspendisse eu sapien vitae arcu lobortis ultrices vitae ac velit. Curabitur id 
+#' Estimation of equilibirum reference points on the results obtained from fitting
+#' a population model can be carried out using the \code{FLBRP} class. Objects
+#' of this classs contain the information necessary for the calculation of
+#' population and fisheries quantities (abundance, catches, ...) under a range
+#' of levels of fishing mortality ('F'). From these, the values of those
+#' quantities that maximize or minimize the values of different indicators can
+#' be calculated.
+#'
+#' The most common input for the calculation of reference points is the result
+#' of an stock assessment model fit, usually provided as two objects of class
+#' \code{\link{FLStock}} and \code{\link{FLSR}}.
 #' 
 #' @name FLBRP
 #' @rdname FLBRP
@@ -77,7 +84,10 @@ validFLBRP <- function(object){
 #' @section Validity:
 #'
 #'   \describe{
-#'     \item{VALIDITY}{Neque porro quisquam est qui dolorem ipsum.}
+#'     \item{\code{.obs} slots dims 1:5}{Slots containing observations, named
+#'       \code{*.obs}, must share dimensions 1 to 5}
+#'     \item{by-age slots dims 1:5}{Slots containing vectors of values at age,
+#'        must share dimensions 1 to 5}
 #' }
 #'
 #' You can inspect the class validity function by using

@@ -45,26 +45,23 @@ setReplaceMethod("refpts", signature(object="FLBRP", value="FLPar"),
   }
 ) # }}}
 
-# msy {{{
+# msy et al {{{
 setMethod("msy", signature(x="FLBRP"),
   function(x) {
     return(refpts(x, "msy", "yield"))
-  }) # {{{
+  })
 
-# fmsy {{{
 setMethod("fmsy", signature(x="FLBRP"),
   function(x) {
     return(refpts(x, "msy", "harvest"))
-  }) # {{{
+  })
 
-# bmsy {{{
 setMethod("bmsy", signature(x="FLBRP"),
   function(x) {
     return(refpts(x, "msy", "biomass"))
-  }) # {{{
+  })
 
-# sbmsy {{{
 setMethod("sbmsy", signature(x="FLBRP"),
   function(x) {
     return(refpts(x, "msy", "ssb"))
-  }) # {{{
+  }) # }}}

@@ -62,3 +62,14 @@ setMethod('iter', signature(obj='FLBRP'),
 
     return(obj)}) # }}}
 
+# summary {{{
+setMethod("summary", signature("FLBRP"),
+  function(object) {
+  
+    callNextMethod()
+    cat("\n")
+
+    flag <- !all(is.na(refpts(object)))
+    cat("refpts: ", ifelse(flag, "Calculated", "NA"), "\n")
+  }
+) # }}}
