@@ -34,6 +34,8 @@ lib: $(LIB)
 $(LIB): $(ADCOBJS)
 	@${AR} -rucs $(LIB) ${ADCOBJS}
 
+.PHONY: clean
+
 clean:
-		@-rm -f $(LIB)
-		@-rm -f $(ADCOBJS)
+	@-rm -f $(LIB)
+	@-rm -f $(ADCOBJS)
