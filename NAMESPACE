@@ -41,6 +41,7 @@ exportMethods(
   "catch.obs",
   "catch.sel",
   "catch.wt",
+  "coerce",
   "discards.n",
   "FLBRP",
   "fmsy",
@@ -51,6 +52,7 @@ exportMethods(
   "propagate",
   "sbmsy",
   "stock.n",
+  "summary",
   "yield.obs",
   "ypr"
 )
