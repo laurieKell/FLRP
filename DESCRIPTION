@@ -25,6 +25,7 @@ Collate:
   coerce.R
   refpts.R
   utilities.R
+  plots.R
 Additional_repositories: http://flr-project.org/R
 License: GPL-3
 LazyLoad: Yes
