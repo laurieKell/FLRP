@@ -6,7 +6,7 @@
 #
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
-
+# plot {{{
 setMethod("plot", signature("FLBRP", "missing"),
   function(x, refpts=c("msy", "mey", "f0.1", "spr.30"), obs=FALSE, ...) {
 
@@ -36,6 +36,10 @@ setMethod("plot", signature("FLBRP", "missing"),
       panels <- c(panels, list(
         P5=c(x="harvest", y="profit", panel="Equilibrium Profit v. F"),
         P6=c(x="ssb", y="profit", panel="Equilibrium Profit v. SSB")))
+    } else {
+      dms <- dimnames(rps)
+      rps <- rps[!dms$refpt %in% "mey",
+        !dms$quant %in% c("revenue", "cost", "profit")]
     }
                              
     # APPLY over panels to extract x, y and panel for each element
@@ -80,7 +84,7 @@ setMethod("plot", signature("FLBRP", "missing"),
         rpdat$yend <- rpdat$y * 0.95
         rpdat$ymax <- ave(rpdat$y, rpdat$panel, FUN=max)
         rpdat$ystart <- rpdat$ymin + (rpdat$ymax * 0.05)
-       
+        
         # LABEL
         p <- p + geom_text(data=rpdat,
           aes(x=data, y=ymin, label=refpt), angle = 90, size=3, vjust="left") +
@@ -108,4 +112,4 @@ setMethod("plot", signature("FLBRP", "missing"),
 
     return(p)
   }
-)
+) # }}}
