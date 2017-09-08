@@ -13,7 +13,8 @@ Description: Calculates a range of biological reference points based upon yield
 URL: http://flr-project.org/FLRP
 Depends:
   FLCore(>= 2.6.4),
-  ggplotFL
+  ggplotFL,
+  ggplot2
 Imports:
   methods
 Collate:

@@ -8,7 +8,7 @@
 
 
 setMethod("plot", signature("FLBRP", "missing"),
-  function(x, obs=FALSE, refpts=TRUE, ...) {
+  function(x, refpts=c("msy", "mey", "f0.1", "spr.30"), obs=FALSE, ...) {
 
     # EXTRACT metrics
     df <- model.frame(metrics(x,
@@ -17,8 +17,12 @@ setMethod("plot", signature("FLBRP", "missing"),
     # refpts
     rps <- refpts(x)
 
-    # SUBSET df
-    df <- subset(df, harvest <= c(rps['crash', 'harvest']))
+    # estimated?
+    rpf <- !all(is.na(rps))
+
+    # SUBSET df IF rpf
+    if(rpf)
+      df <- subset(df, harvest <= c(rps['crash', 'harvest']))
 
     # NO economics
     panels <- list(
@@ -48,7 +52,7 @@ setMethod("plot", signature("FLBRP", "missing"),
       xlab("") + ylab("")
 
     # PLOT refpts
-    if(refpts) {
+    if(rpf) {
       rpdat <- lapply(panels, function(p) {
         # CBIND x, + refpt, iter ...
         cbind(as(rps[, p['x']], 'data.frame')[, -2],
@@ -56,8 +60,34 @@ setMethod("plot", signature("FLBRP", "missing"),
         y=c(rps[,p['y']]), panel=unname(p['panel']))
       })
       rpdat <- do.call(rbind, c(rpdat, list(make.row.names = FALSE)))
+      
+      # CALCULATE ymin per panel
+      rpdat$ymin <- ave(rpdat$y, rpdat$panel, FUN=function(x) pmin(min(x), 0))
+      
+      # ADD rps points
+      p <- p + geom_point(data=rpdat, size=2.5,
+        aes(x=data, y=y, group=refpt, fill=refpt, shape=refpt)) +
+        scale_shape_manual(values=c(21, 21, 21, 24, 24, 24, 21)) +
+        scale_fill_manual(values=c("white", "#4dac26", "black", "#f1b6da",
+          "#f7f7f7", "#b8e186", "#d01c8b")) 
 
-      p <- p + geom_point(data=rpdat, aes(x=data, y=y, colour=refpt))
+      # ADD refpts labels and text
+      if(length(refpts) > 0 & is.character(refpts)){
+          
+        rpdat <- subset(rpdat, refpt %in% refpts)
+      
+        # CALCULATE limits of lines
+        rpdat$yend <- rpdat$y * 0.95
+        rpdat$ymax <- ave(rpdat$y, rpdat$panel, FUN=max)
+        rpdat$ystart <- rpdat$ymin + (rpdat$ymax * 0.05)
+       
+        # LABEL
+        p <- p + geom_text(data=rpdat,
+          aes(x=data, y=ymin, label=refpt), angle = 90, size=3, vjust="left") +
+          # LINES
+          geom_segment(data=rpdat, aes(x=data, y=ystart, xend=data, yend=yend),
+          colour="grey")
+      }
     }
 
     # PLOT observations

@@ -30,7 +30,7 @@ ple4brp <- brp(ple4brp)
 price(ple4brp) <- c(rep(1.15,3),rep(1.3,2),rep(1.55,5)) * 1000
 units(price(ple4brp)) <- "euro / t"
 
-vcost(ple4brp) <- 70000 * 1000
+vcost(ple4brp) <- 30000 * 1000
 units(vcost(ple4brp)) <- "euro / effort"
 
 fcost(ple4brp) <- 35000 * 1000

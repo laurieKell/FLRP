@@ -52,7 +52,7 @@ validFLBRP <- function(object){
 #' @name FLBRP
 #' @rdname FLBRP
 #' @docType class
-#' @aliases FLBRP FLBRP-methods FLBRP-class
+#' @aliases FLBRP-class
 #'
 #' @slot model The formula for the stock-recruitment model, `formula,`.
 #' @slot params Parameters of the stock-recruitment relationship, `FLPar,`.

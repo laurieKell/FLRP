@@ -2,6 +2,8 @@
 # FLRP/R/generics.R
 
 # constructors {{{
+#' @rdname FLBRP
+#' @aliases FLBRP FLBRP-methods
 setGeneric('FLBRP', function(object, sr, ...)
 		standardGeneric('FLBRP'))
 # }}}
@@ -33,4 +35,7 @@ setGeneric('yield.obs', function(object, ...)
 
 setGeneric('ypr', function(object, ...)
 		standardGeneric('ypr'))
+
+setGeneric('msyRange', function(object, ...)
+		standardGeneric('msyRange'))
 

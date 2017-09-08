@@ -289,4 +289,72 @@ setMethod('profit', signature(object='FLBRP'),
   }
 ) # }}}
 
+# msyRange {{{
 
+#' @title MSY range
+#' 
+#' @description 
+#' Calculates the values of fishing mortality, biomass, SSB etc. for a range of yields either side of MSY. 
+#' 
+#' @param object \code{FLBRP}
+#' @param range the values of yield around MSY 
+#' 
+#' @return object of class \code{FLPar} with reference point quantities
+#' 
+#' @export
+#' @docType methods
+#' @rdname msyrange
+#' 
+#' @seealso \code{\link{refpts}} 
+#' 
+#' @examples
+#' \dontrun{
+#' library(FLBRP)
+#' 
+#' data(ple4)
+#' ple4.sr=fmle(as.FLSR(ple4,model="bevholt"))
+#' 
+#' ple4.eql=FLBRP(ple4,sr=ple4.sr)
+#' 
+#' msyRange(ple4.eql)
+#' }
+setMethod("msyRange", signature(object="FLBRP"),
+  function(object, range=0.10) {
+
+    refpts(object) <- FLPar(NA,
+      dimnames=list(refpt=c("msy","min","max"),
+      quantity=c("harvest","yield","rec","ssb","biomass","revenue","cost","profit"),
+      iter=1))
+
+    object <- brp(object)
+
+    refpts(object)["min","yield"] <- refpts(object)["msy","yield"] * (1-range)
+    
+    refpts(object)["max","yield"] <- refpts(object)["msy","yield"] * (1-range)
+     
+    fn <- function(f,target,obj) {
+      
+      refpts(obj) <- FLPar(c(f, rep(NA,7)),
+        dimnames=list(refpt=c("f"),
+        quantity=c("harvest","yield","rec","ssb","biomass","revenue","cost","profit"),
+        iter =1))
+     
+     return((refpts(brp(obj))[,"yield"]- target) ^ 2)
+    }
+     
+    for (i in dimnames(refpts(object))$iter) {
+
+      refpts(object)["min", "harvest", i] <- optimise(fn,
+        c(0.01, refpts(object)["msy", "harvest",i]),
+        target=refpts(object)["min", "yield"],
+        obj=object, tol=.Machine$double.eps^0.5)$minimum
+
+      refpts(object)["max", "harvest", i] <- optimise(fn,
+        c(1, 10) * c(refpts(object)["msy", "harvest",i]),
+        target=refpts(object)["max", "yield"], obj=object,
+        tol=.Machine$double.eps^0.5)$minimum
+    }
+  
+    refpts(brp(object))
+  }
+) # }}}

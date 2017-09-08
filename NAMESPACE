@@ -1,6 +1,8 @@
 useDynLib("FLRP")
 import("FLCore")	
+import("ggplot2")
 import("ggplotFL")
+importFrom("stats", "ave")
 importFrom("methods",
   "as",
   "callNextMethod",
@@ -49,6 +51,7 @@ exportMethods(
   "iter",
   "landings.n",
   "msy",
+  "msyRange",
   "plot",
   "propagate",
   "refpts",

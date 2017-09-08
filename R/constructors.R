@@ -11,6 +11,8 @@
 # FLBRP
 
 # FLBRP(object='missing', sr='missing') {{{
+#' @rdname FLBRP
+#' @aliases FLBRP-missing,missing-method
 setMethod('FLBRP', signature(object='missing', sr='missing'),
   function(..., model=formula(rec~a), params=FLPar(1, params='a'),
     fbar=FLQuant(seq(0, 4, 0.04), quant='age'))
@@ -309,9 +311,6 @@ setMethod('FLBRP', signature(object='FLBRP', sr='list'),
        slot(newObj, slt)<-args[[slt]]
 
    return(newObj)})
-
-setMethod('FLBRP', signature(object='character', sr='missing'),
-          function(object, sr, ...) pro2boxFLBRP(object, ...))
 
 setPA=function(x,df) {
   
