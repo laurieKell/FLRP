@@ -1,6 +1,6 @@
 useDynLib("FLRP")
-import("FLCore")	
 import("ggplot2")
+import("FLCore")	
 import("ggplotFL")
 importFrom("stats", "ave")
 importFrom("methods",
@@ -44,6 +44,7 @@ exportMethods(
   "catch.sel",
   "catch.wt",
   "coerce",
+  "cost",
   "discards.n",
   "FLBRP",
   "fmsy",
@@ -53,9 +54,11 @@ exportMethods(
   "msy",
   "msyRange",
   "plot",
+  "profit",
   "propagate",
   "refpts",
   "refpts<-",
+  "revenue",
   "sbmsy",
   "stock.n",
   "summary",
