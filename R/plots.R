@@ -14,6 +14,12 @@ setMethod("plot", signature("FLBRP", "missing"),
     df <- model.frame(metrics(x,
       list(ssb=ssb, f=fbar, rec=rec, catch=catch, profit=profit)), drop=TRUE)
 
+    # refpts
+    rps <- refpts(x)
+
+    # SUBSET df
+    df <- subset(df, f <= c(rps['crash', 'harvest']))
+
     # NO economics
     panels <- list(
       P1=c(x="f", y="ssb", panel="Equilibrium SSB v. F"),

@@ -12,7 +12,10 @@ library(FLRP)
 
 data(ple4)
 
-ple4sr <- fmle(as.FLSR(ple4, model="bevholt"))
+
+ple4sr <- fmle(transform(as.FLSR(ple4, model="bevholt"), ssb=ssb/100, rec=rec/100))
+params(ple4sr)['b',] <- params(ple4sr)['b',] / 100
+ple4sr <- transform(ple4sr, ssb=ssb*100, rec=rec*100)
 
 ple4brp <- FLBRP(ple4, sr=ple4sr, fbar=FLQuant(seq(0, 3, length=101)),
   price=FLQuant(1.50, dimnames=list(age=1:10)))
