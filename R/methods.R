@@ -278,7 +278,8 @@ setMethod('revenue', signature(object='FLBRP'),
 # cost {{{
 setMethod('cost', signature(object='FLBRP'),
   function(object){
-    return(quantSums((fbar(object) %*% vcost(object)) %+% fcost(object)))
+    return(quantSums(FLCore::`%+%`(fbar(object) %*% vcost(object), fcost(object))))
+    # return(quantSums((fbar(object) %*% vcost(object)) %+% fcost(object)))
   }
 ) # }}}
 
