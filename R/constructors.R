@@ -2,7 +2,7 @@
 # FLRP/R/constructors.R
 
 # Copyright European Union, 2017
-# Authors: Laurie Kell <laurie@kell.es>
+# Authors: Laurie Kell <laurie@seaplusplus.co.uk>
 #          Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>
 #          Finlay Scott (EC JRC) <finlay.scott@ec.europa.eu>
 #

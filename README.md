@@ -1,7 +1,7 @@
 # FLRP
 - Version: 0.0.2
 - Date: 2017-09-13
-- Author: Laurie Kell <laurie@kell.es>, Iago Mosqueira <iago.mosqueira@ec.europa.eu>, Finlay Scott <finlay.scott@ec.europa.eu>
+- Author: Laurie Kell <laurie@seaplusplus.co.uk>, Iago Mosqueira <iago.mosqueira@ec.europa.eu>, Finlay Scott <finlay.scott@ec.europa.eu>
 - Maintainer: Iago Mosqueira <iago.mosqueira@ec.europa.eu>
 - Repository: <https://github.com/flr/FLRP/>
 - Bug reports: <https://github.com/flr/FLRP/issues>
