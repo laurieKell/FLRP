@@ -6,13 +6,14 @@
 #
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
+# fwdwindow (FLStock, FLBRP) {{{
+
 #' @title fwdWindow
-#' @rdname fwdWindow
-#' @md
-#' @description
-#'   Extends an object representing a fish population for projecting into the
-#'   future using the assumed equilibirum values used in the calculation of
-#'   reference points 
+#'
+#' @description Extends an object representing a fish population for projecting into the
+#' future using the assumed equilibirum values used in the calculation of
+#' reference points 
+#'
 #' @param x The population object, for example of class \code{\link{FLStock}}
 #' @param y The reference points object, of class \code{\link{FLBRP}}
 #' @param end Final year of the extended object, always interpreted as a *character*
@@ -20,11 +21,14 @@
 #' @details
 #'     slts <- c("stock.wt", "landings.wt", "discards.wt", "catch.wt",
 #'        "m", "mat", "harvest.spwn", "m.spwn")
+#' @rdname fwdWindow
+#' @docType methods
+#' @md
 #' @examples
 #' data(ple4)
 #'
 #' # Create the FLSR and FLBRP objects
-#' psr <- fmle(as.FLSR(ple4, model="bevholt"))
+#' psr <- fmle(as.FLSR(ple4, model="bevholt"), control=list(trace=0))
 #' prp <- brp(FLBRP(ple4, sr=psr))
 #'
 #' res <- fwdWindow(ple4, prp, end=2014)
@@ -56,4 +60,8 @@ setMethod("fwdWindow", signature(x="FLStock", y="FLBRP"),
 
     return(res)
   }
-)
+) # }}}
+
+# TODO fwdwindow (FLBiol, FLBRP) {{{
+
+# }}}

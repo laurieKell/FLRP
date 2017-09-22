@@ -22,7 +22,7 @@ setMethod("plot", signature("FLBRP", "missing"),
 
     # SUBSET df IF rpf
     if(rpf)
-      df <- subset(df, harvest <= c(rps['crash', 'harvest']))
+      df <- df[df$harvest <= c(rps['crash', 'harvest']),]
 
     # NO economics
     panels <- list(
@@ -51,7 +51,7 @@ setMethod("plot", signature("FLBRP", "missing"),
     dat <- do.call(rbind, c(dat, list(make.row.names = FALSE)))
 
     # PLOT
-    p <- ggplot(dat, aes(x=x, y=y)) + geom_line() +
+    p <- ggplot(dat, aes_(x=~x, y=~y)) + geom_line() +
       facet_wrap(~panel, scales="free", ncol=2) +
       xlab("") + ylab("")
 
@@ -70,7 +70,7 @@ setMethod("plot", signature("FLBRP", "missing"),
       
       # ADD rps points
       p <- p + geom_point(data=rpdat, size=2.5,
-        aes(x=data, y=y, group=refpt, fill=refpt, shape=refpt)) +
+        aes_(x=~data, y=~y, group=~refpt, fill=~refpt, shape=~refpt)) +
         scale_shape_manual(values=c(21, 21, 21, 24, 24, 24, 21)) +
         scale_fill_manual(values=c("white", "#4dac26", "black", "#f1b6da",
           "#f7f7f7", "#b8e186", "#d01c8b")) 
@@ -78,7 +78,7 @@ setMethod("plot", signature("FLBRP", "missing"),
       # ADD refpts labels and text
       if(length(refpts) > 0 & is.character(refpts)){
           
-        rpdat <- subset(rpdat, refpt %in% refpts)
+        rpdat <- rpdat[rpdat$refpt %in% refpts,]
       
         # CALCULATE limits of lines
         rpdat$yend <- rpdat$y * 0.95
@@ -87,9 +87,9 @@ setMethod("plot", signature("FLBRP", "missing"),
         
         # LABEL
         p <- p + geom_text(data=rpdat,
-          aes(x=data, y=ymin, label=refpt), angle = 90, size=3, vjust="left") +
+          aes_(x=~data, y=~ymin, label=~refpt), angle = 90, size=3, vjust="left") +
           # LINES
-          geom_segment(data=rpdat, aes(x=data, y=ystart, xend=data, yend=yend),
+          geom_segment(data=rpdat, aes_(x=~data, y=~ystart, xend=~data, yend=~yend),
           colour="grey")
       }
     }

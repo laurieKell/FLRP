@@ -126,6 +126,15 @@ validFLBRP <- function(object){
 #' @keywords classes
 #' @examples
 #'
+#' data(ple4)
+#'
+#' # Create the FLSR and FLBRP objects
+#' psr <- fmle(as.FLSR(ple4, model="bevholt"), control=list(trace=0))
+#' prp <- brp(FLBRP(ple4, sr=psr))
+#'
+#' summary(prp)
+#' refpts(prp)
+
 setClass("FLBRP",
   contains="FLComp",
   representation(

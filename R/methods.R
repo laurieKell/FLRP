@@ -302,7 +302,6 @@ setMethod('profit', signature(object='FLBRP'),
 #' 
 #' @return object of class \code{FLPar} with reference point quantities
 #' 
-#' @export
 #' @docType methods
 #' @rdname msyrange
 #' 
