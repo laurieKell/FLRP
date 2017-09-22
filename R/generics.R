@@ -30,6 +30,9 @@ setGeneric('refpts', function(object, ...)
 setGeneric('refpts<-', function(object, ..., value)
 		standardGeneric('refpts<-'))
 
+setGeneric('spr', function(object, ...)
+		standardGeneric('spr'))
+
 setGeneric('yield.obs', function(object, ...)
 		standardGeneric('yield.obs'))
 

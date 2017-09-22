@@ -29,6 +29,7 @@ Collate:
   utilities.R
   fwdWindow.R
   plots.R
+  spr.R
 Additional_repositories: http://flr-project.org/R
 License: GPL-3
 LazyLoad: Yes

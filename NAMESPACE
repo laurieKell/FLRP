@@ -72,6 +72,8 @@ exportMethods(
   "refpts<-",
   "revenue",
   "sbmsy",
+  "spr",
+  "spr0",
   "stock.n",
   "summary",
   "yield.obs",
