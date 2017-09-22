@@ -136,6 +136,14 @@ Methods exist for various calculations based on values stored in the class:
 
 \examples{
 
+data(ple4)
+
+# Create the FLSR and FLBRP objects
+psr <- fmle(as.FLSR(ple4, model="bevholt"), control=list(trace=0))
+prp <- brp(FLBRP(ple4, sr=psr))
+
+summary(prp)
+refpts(prp)
 }
 \seealso{
 \link{FLComp} \link{FLStock} \link{FLSR} \link{brp}
