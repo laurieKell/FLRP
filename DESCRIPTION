@@ -18,6 +18,8 @@ Depends:
   ggplot2
 Imports:
   methods
+Suggests:
+  knitr
 Collate:
   classes.R
   generics.R
@@ -31,6 +33,7 @@ Collate:
   plots.R
   spr.R
 Additional_repositories: http://flr-project.org/R
+VignetteBuilder: knitr
 License: GPL-3
 LazyLoad: Yes
 LazyData: No
