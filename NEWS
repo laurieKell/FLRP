@@ -1,7 +1,7 @@
- FLRP 0.0.1
+ FLRP 0.0.3
 
  NEW FEATURES
-- A new feature
+- New code for fwdWindow(FLStock, FLBRP)
 
  USER-VISIBLE CHANGES
 
@@ -12,3 +12,6 @@
  DOCUMENTATION
 
  DEPRECATED & DEFUNCT
+- fwdwindow(FLStock, FLBRP) only has 'end' argument for call to window(FLStock)
+  as 'start' and 'frequency' are set to the first year of the FLStock object and
+  1 respectively.
