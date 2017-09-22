@@ -6,7 +6,7 @@
 #
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
-# plot {{{
+# plot(FLBRP) {{{
 setMethod("plot", signature("FLBRP", "missing"),
   function(x, refpts=c("msy", "mey", "f0.1", "spr.30"), obs=FALSE, ...) {
 
@@ -113,3 +113,5 @@ setMethod("plot", signature("FLBRP", "missing"),
     return(p)
   }
 ) # }}}
+
+# TODO plot(FLBRPs)

@@ -1,6 +1,6 @@
 Package: FLRP
 Title: Reference Points for Fisheries Management
-Version: 0.0.2.9000
+Version: 0.0.2.9001
 Date: 2017-09-22
 Authors@R: c(
   person("Iago", "Mosqueira", email = "iago.mosqueira@ec.europa.eu", role = "cre"),

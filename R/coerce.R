@@ -45,7 +45,7 @@ setAs('FLBRP', 'predictModel',
   }
 ) # }}}
 
-# as(FLStock) {{{
+# To FLStock {{{
 setAs('FLBRP', 'FLStock',
   function(from){
     

@@ -2,6 +2,7 @@
 
 ## NEW FEATURES
 - New code for fwdWindow(FLStock, FLBRP)
+- spr(FLBRP) and spr0(FLBRP) are now implemented
 
 ## USER-VISIBLE CHANGES
 
