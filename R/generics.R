@@ -39,3 +39,5 @@ setGeneric('ypr', function(object, ...)
 setGeneric('msyRange', function(object, ...)
 		standardGeneric('msyRange'))
 
+setGeneric("fwdWindow", function(x, y, ...)
+    standardGeneric("fwdWindow"))

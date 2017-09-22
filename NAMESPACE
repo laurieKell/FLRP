@@ -48,6 +48,7 @@ exportMethods(
   "discards.n",
   "FLBRP",
   "fmsy",
+  "fwdWindow",
   "hcrYield",
   "iter",
   "landings.n",

@@ -26,6 +26,7 @@ Collate:
   coerce.R
   refpts.R
   utilities.R
+  fwdWindow.R
   plots.R
 Additional_repositories: http://flr-project.org/R
 License: GPL-3
