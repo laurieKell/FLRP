@@ -1,5 +1,16 @@
 useDynLib("FLRP")
-import("ggplot2")
+importFrom("ggplot2",
+  "ggplot",
+  "geom_point",
+  "scale_shape_manual",
+  "scale_fill_manual",
+  "geom_text",
+  "geom_segment",
+  "aes_",
+  "xlab",
+  "ylab",
+  "geom_line",
+  "facet_wrap")
 import("FLCore")	
 import("ggplotFL")
 importFrom("stats", "ave")

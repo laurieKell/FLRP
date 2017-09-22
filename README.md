@@ -24,7 +24,6 @@ or download from the [FLRP releases page](https://github.com/flr/FLRP/releases/)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/flr/FLRP?branch=master&svg=true)](https://ci.appveyor.com/project/flr/FLRP)
 
 ## Releases
-- [Latest release](https://github.com/flr/FLRP/releases/tag/)
 - [All release](https://github.com/flr/FLRP/releases/)
 
 ## License

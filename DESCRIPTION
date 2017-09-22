@@ -1,7 +1,7 @@
 Package: FLRP
 Title: Reference Points for Fisheries Management
-Version: 0.0.2
-Date: 2017-09-13
+Version: 0.0.2.9000
+Date: 2017-09-22
 Authors@R: c(
   person("Iago", "Mosqueira", email = "iago.mosqueira@ec.europa.eu", role = "cre"),
   person("Laurence T.", "Kell", email = "laurie@seaplusplus.co.uk", role = "aut"),
@@ -12,7 +12,8 @@ Description: Calculates a range of biological reference points based upon yield
   BMSY.
 URL: http://flr-project.org/FLRP
 Depends:
-  FLCore(>= 2.6.4),
+  R (>= 2.10),
+  FLCore (>= 2.6.4),
   ggplotFL,
   ggplot2
 Imports:

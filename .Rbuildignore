@@ -3,5 +3,6 @@ appveyor.yml
 NEWS.md
 ^Makefile$
 docs
-.git/
+data-raw
+^.git/$
 ^_pkgdown.yml$
