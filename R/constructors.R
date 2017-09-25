@@ -8,8 +8,6 @@
 #
 # Distributed under the terms of the GNU Public License v 3.0
 
-# FLBRP
-
 # FLBRP(object='missing', sr='missing') {{{
 #' @rdname FLBRP
 #' @aliases FLBRP-missing,missing-method
@@ -286,8 +284,6 @@ setMethod('FLBRP', signature(object='FLBRP', sr='missing'),
 
    return(newObj)})
 # }}}
-
-
 
 # FLBRP(object="FLBRP", sr="list") {{{
 setMethod('FLBRP', signature(object='FLBRP', sr='list'),
