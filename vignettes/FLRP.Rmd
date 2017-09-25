@@ -1,12 +1,12 @@
 ---
 title: FLRP
 author: Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>
-date: 2017-09-22 16:17
-output:
-  html_vignette
+date: 2017-09-22
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{FLRP}
+  %\VignetteEncoding{UTF-8}
 tags: FLR
 license: Creative Commons Attribution-ShareAlike 4.0 International Public License
 ---
