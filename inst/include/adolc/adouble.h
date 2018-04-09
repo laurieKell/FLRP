@@ -219,19 +219,19 @@ class ADOLC_DLL_EXPORT adub:public badouble {
 private:
     adub( adub const &) {
 	isInit = false;
-        fprintf(DIAG_OUT,"ADOL-C error: illegal copy construction of adub"
+        Rprintf("ADOL-C error: illegal copy construction of adub"
 		" variable\n          ... adub objects must never be copied\n");
         throw logic_error("illegal constructor call, errorcode=-2");
     }
     adub( void ) {
 	isInit = false;
-        fprintf(DIAG_OUT,"ADOL-C error: illegal default construction of adub"
+        Rprintf("ADOL-C error: illegal default construction of adub"
                 " variable\n");
         throw logic_error("illegal constructor call, errorcode=-2");
     }
     explicit adub( double ) {
 	isInit = false;
-        fprintf(DIAG_OUT,"ADOL-C error: illegal  construction of adub variable"
+        Rprintf("ADOL-C error: illegal  construction of adub variable"
                 " from double\n");
         throw logic_error("illegal constructor call, errorcode=-2");
     }

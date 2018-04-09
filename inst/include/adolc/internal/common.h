@@ -27,6 +27,8 @@
 #   include <cstdio>
 #endif
 
+#include <R.h>
+
 /*--------------------------------------------------------------------------*/
 /* type definitions */
     typedef unsigned int uint;

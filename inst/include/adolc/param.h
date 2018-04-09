@@ -36,12 +36,12 @@ protected:
     double _val;
     locint _idx;
     pdouble(const pdouble&) {
-        fprintf(DIAG_OUT,"ADOL-C error: illegal copy construction of pdouble"
+        Rprintf("ADOL-C error: illegal copy construction of pdouble"
                 " variable\n          ... pdouble objects must never be copied\n");
         throw logic_error("illegal constructor call, errorcode=-2");
     }
     pdouble(void) {
-        fprintf(DIAG_OUT,"ADOL-C error: illegal default construction of pdouble"
+        Rprintf("ADOL-C error: illegal default construction of pdouble"
                 " variable\n");
         throw logic_error("illegal constructor call, errorcode=-2");
     }
