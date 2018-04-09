@@ -73,59 +73,59 @@ void fail( int error ) {
     ADOLC_OPENMP_GET_THREAD_NUMBER;
     switch (error) {
         case ADOLC_MALLOC_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: Memory allocation failed!\n");
+            Rprintf( "ADOL-C error: Memory allocation failed!\n");
             break;
         case ADOLC_INTEGER_TAPE_FOPEN_FAILED:
         case ADOLC_INTEGER_TAPE_FREAD_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: "
+            Rprintf( "ADOL-C error: "
                     "reading integer tape number %d!\n",
                     failAdditionalInfo1);
             printError();
             break;
         case ADOLC_VALUE_TAPE_FOPEN_FAILED:
         case ADOLC_VALUE_TAPE_FREAD_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: "
+            Rprintf( "ADOL-C error: "
                     "reading value tape number %d!\n",
                     failAdditionalInfo1);
             printError();
             break;
         case ADOLC_TAPE_TO_OLD:
-            fprintf(DIAG_OUT, "ADOL-C error: "
+            Rprintf( "ADOL-C error: "
                     "Used tape (%d) was written with ADOL-C version "
                     "older than %d.%d.%d\n", failAdditionalInfo1,
                     ADOLC_NEW_TAPE_VERSION, ADOLC_NEW_TAPE_SUBVERSION,
                     ADOLC_NEW_TAPE_PATCHLEVEL);
-            fprintf(DIAG_OUT, "              "
+            Rprintf( "              "
                     "This is ADOL-C %d.%d.%d\n", ADOLC_VERSION,
                     ADOLC_SUBVERSION, ADOLC_PATCHLEVEL);
             break;
         case ADOLC_WRONG_LOCINT_SIZE:
-            fprintf(DIAG_OUT, "ADOL-C error: Used tape (%d) was written with "
+            Rprintf( "ADOL-C error: Used tape (%d) was written with "
                     "locints of size %d, size %d required.\n",
                     ADOLC_CURRENT_TAPE_INFOS.tapeID, failAdditionalInfo1,
                     failAdditionalInfo2);
             break;
         case ADOLC_MORE_STAT_SPACE_REQUIRED:
-            fprintf(DIAG_OUT, "ADOL-C error: Not enough space for stats!\n"
+            Rprintf( "ADOL-C error: Not enough space for stats!\n"
                     "              Please contact the ADOL-C team!\n");
             break;
 
         case ADOLC_TAPING_BUFFER_ALLOCATION_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: Cannot allocate tape buffers!\n");
+            Rprintf( "ADOL-C error: Cannot allocate tape buffers!\n");
             break;
         case ADOLC_TAPING_TBUFFER_ALLOCATION_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: Cannot allocate taylor buffer!\n");
+            Rprintf( "ADOL-C error: Cannot allocate taylor buffer!\n");
             break;
         case ADOLC_TAPING_READ_ERROR_IN_TAYLOR_CLOSE:
-            fprintf(DIAG_OUT, "ADOL-C error: Read error in taylor_close n= %d\n",
+            Rprintf( "ADOL-C error: Read error in taylor_close n= %d\n",
                     failAdditionalInfo1);
             break;
         case ADOLC_TAPING_TO_MANY_TAYLOR_BUFFERS:
-            fprintf(DIAG_OUT, "ADOL-C error: To many taylor buffers!\n"
+            Rprintf( "ADOL-C error: To many taylor buffers!\n"
                     "              Increase ADOLC_GLOBAL_TAPE_VARS.maxNumberTaylorBuffers\n");
             break;
         case ADOLC_TAPING_TO_MANY_LOCINTS:
-            fprintf(DIAG_OUT, "ADOL-C error: Maximal number (%d) of live active "
+            Rprintf( "ADOL-C error: Maximal number (%d) of live active "
                     "variables exceeded!\n\n"
                     "Possible remedies :\n\n"
                     " 1. Use more automatic local variables and\n"
@@ -140,7 +140,7 @@ void fail( int error ) {
                     (int)sizeof(long) );
             break;
         case ADOLC_TAPING_STORE_REALLOC_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: Failure to reallocate storage for "
+            Rprintf( "ADOL-C error: Failure to reallocate storage for "
                     "adouble values!\n\n"
                     "              oldStore     = %p\n"
                     "              newStore     = NULL\n"
@@ -156,41 +156,41 @@ void fail( int error ) {
                     );
             break;
         case ADOLC_TAPING_FATAL_IO_ERROR:
-            fprintf(DIAG_OUT, "ADOL-C error: Fatal error-doing a read or "
+            Rprintf( "ADOL-C error: Fatal error-doing a read or "
                     "write!\n");
             printError();
             break;
         case ADOLC_TAPING_TAPE_STILL_IN_USE:
-            fprintf(DIAG_OUT, "ADOL-C error: Tape %d is still in use!\n",
+            Rprintf( "ADOL-C error: Tape %d is still in use!\n",
                     failAdditionalInfo1);
             break;
         case ADOLC_TAPING_TAYLOR_OPEN_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: while opening taylor file!\n");
+            Rprintf( "ADOL-C error: while opening taylor file!\n");
             printError();
             break;
 
         case ADOLC_EVAL_SEEK_VALUE_STACK:
-            fprintf(DIAG_OUT, "ADOL-C error: in seeking value stack file!\n");
+            Rprintf( "ADOL-C error: in seeking value stack file!\n");
             break;
         case ADOLC_EVAL_OP_TAPE_READ_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: while reading operations tape!\n");
+            Rprintf( "ADOL-C error: while reading operations tape!\n");
             break;
         case ADOLC_EVAL_VAL_TAPE_READ_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: while reading values tape!\n");
+            Rprintf( "ADOL-C error: while reading values tape!\n");
             break;
         case ADOLC_EVAL_LOC_TAPE_READ_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: while reading locations tape!\n");
+            Rprintf( "ADOL-C error: while reading locations tape!\n");
             break;
         case ADOLC_EVAL_TAY_TAPE_READ_FAILED:
-            fprintf(DIAG_OUT, "ADOL-C error: while reading value stack tape!\n");
+            Rprintf( "ADOL-C error: while reading value stack tape!\n");
             break;
 
         case ADOLC_REVERSE_NO_TAYLOR_STACK:
-            fprintf(DIAG_OUT, "ADOL-C error: No taylor stack found for tape "
+            Rprintf( "ADOL-C error: No taylor stack found for tape "
                     "%d! => Check forward sweep!\n", failAdditionalInfo1);
             break;
         case ADOLC_REVERSE_COUNTS_MISMATCH:
-            fprintf(DIAG_OUT, "ADOL-C error: Reverse sweep on tape %d aborted!\n"
+            Rprintf( "ADOL-C error: Reverse sweep on tape %d aborted!\n"
                     "              Number of dependents(%u) and/or "
                     "independents(%u)\n"
                     "              variables passed to reverse is "
@@ -202,7 +202,7 @@ void fail( int error ) {
                     ADOLC_CURRENT_TAPE_INFOS.stats[NUM_INDEPENDENTS]);
             break;
         case ADOLC_REVERSE_TAYLOR_COUNTS_MISMATCH:
-            fprintf(DIAG_OUT, "ADOL-C error: Reverse fails on tape %d because "
+            Rprintf( "ADOL-C error: Reverse fails on tape %d because "
                     "the number of independent\n"
                     "              and/or dependent variables given to"
                     " reverse are inconsistent\n"
@@ -212,101 +212,101 @@ void fail( int error ) {
             break;
 
         case ADOLC_BUFFER_NULLPOINTER_FUNCTION:
-            fprintf(DIAG_OUT, "ADOL-C error: NULL pointer supplied in buffer "
+            Rprintf( "ADOL-C error: NULL pointer supplied in buffer "
                     "handling.\n");
             break;
         case ADOLC_BUFFER_INDEX_TO_LARGE:
-            fprintf(DIAG_OUT, "ADOL-C error: Index for buffer element too "
+            Rprintf( "ADOL-C error: Index for buffer element too "
                     "large.\n");
             break;
 
         case ADOLC_EXT_DIFF_NULLPOINTER_STRUCT:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Got null pointer as pointer to struct "
                     " containing ext. diff. function information!\n");
             break;
         case ADOLC_EXT_DIFF_WRONG_TAPESTATS:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Number of independents/dependents recorded on"
                     " tape differ from number supplied by user!\n");
             break;
         case ADOLC_EXT_DIFF_NULLPOINTER_FUNCTION:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Got NULL pointer as "
                     "extern function pointer!\n");
             break;
         case ADOLC_EXT_DIFF_NULLPOINTER_DIFFFUNC:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: No function for external differentiation found"
                     " to work with (null pointer)\n!");
             break;
         case ADOLC_EXT_DIFF_NULLPOINTER_ARGUMENT:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Got at least one null pointer as argument to"
                     " extern differnetiated function!\n");
             break;
         case ADOLC_EXT_DIFF_WRONG_FUNCTION_INDEX:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Function with specified index not found!\n");
             break;
 
         case ADOLC_EXT_DIFF_LOCATIONGAP:
-          fprintf(DIAG_OUT,
+          Rprintf(
                   "ADOL-C error: active type arguments passed to call_ext_fct do not have contiguous ascending locations; use ensureContiguousLocations(size_t) to reserve  contiguous blocks prior to allocation of the arguments.\n");
           break;
 
         case ADOLC_CHECKPOINTING_CPINFOS_NULLPOINTER:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Got null pointer as pointer to struct "
                     " containing checkpointing information!\n");
             break;
         case ADOLC_CHECKPOINTING_NULLPOINTER_ARGUMENT:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Got null pointer instead of argument pointer "
                     "within checkpointing infos!\n");
             break;
         case ADOLC_CHECKPOINTING_NULLPOINTER_FUNCTION:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Got null pointer instead of function pointer "
                     "within checkpointing infos!\n");
             break;
         case ADOLC_CHECKPOINTING_NULLPOINTER_FUNCTION_DOUBLE:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Got null pointer instead of function (double "
                     "version) pointer within checkpointing infos!\n");
             break;
         case ADOLC_CHECKPOINTING_REVOLVE_IRREGULAR_TERMINATED:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Irregualar termination of REVOLVE!\n");
             break;
         case ADOLC_CHECKPOINTING_UNEXPECTED_REVOLVE_ACTION:
-            fprintf(DIAG_OUT,
+            Rprintf(
                     "ADOL-C error: Unextpected REVOLVE action in forward mode!\n"
                    );
             break;
 	case ADOLC_WRONG_PLATFORM_32:
-	    fprintf(DIAG_OUT,
+	    Rprintf(
 		    "ADOL-C error: Trace was created on a 64-bit platform, cannot be opened on 32-bit platform!\n"
 		);
 	    break;
 	case ADOLC_WRONG_PLATFORM_64:
-	    fprintf(DIAG_OUT,
+	    Rprintf(
 		    "ADOL-C error: Trace was created on a 32-bit platform, cannot be opened on 64-bit platform!\n"
 		);
 	    break;
         case ADOLC_TAPING_NOT_ACTUALLY_TAPING:
-	    fprintf(DIAG_OUT,
+	    Rprintf(
 		    "ADOL-C error: Trace %d is not being currently created!\n",
 		    failAdditionalInfo1);
 	    break;
 
         case ADOLC_VEC_LOCATIONGAP:
-          fprintf(DIAG_OUT,
+          Rprintf(
                   "ADOL-C error: arrays passed to vector operation do not have contiguous ascending locations;\nuse dynamic_cast<adouble*>(advector&) \nor call ensureContiguousLocations(size_t) to reserve  contiguous blocks prior to allocation of the arrays.\n");
           break;
 
         default:
-            fprintf(DIAG_OUT, "ADOL-C error => unknown error type!\n");
+            Rprintf( "ADOL-C error => unknown error type!\n");
             adolc_exit(-1, "", __func__, __FILE__, __LINE__);
             break;
     }
@@ -316,39 +316,39 @@ void fail( int error ) {
 
 /* print an error message describing the error number */
 void printError() {
-    fprintf(DIAG_OUT, "              ");
+    Rprintf( "              ");
     switch (errno) {
         case EACCES:
-            fprintf(DIAG_OUT, ">>> Access denied! <<<\n");
+            Rprintf( ">>> Access denied! <<<\n");
             break;
         case EFBIG:
-            fprintf(DIAG_OUT, ">>> File too big! <<<\n");
+            Rprintf( ">>> File too big! <<<\n");
             break;
         case EMFILE:
-            fprintf(DIAG_OUT, ">>> Too many open files for this process! <<<\n");
+            Rprintf( ">>> Too many open files for this process! <<<\n");
             break;
         case ENAMETOOLONG:
-            fprintf(DIAG_OUT, ">>> Path/file name too long! <<<\n");
+            Rprintf( ">>> Path/file name too long! <<<\n");
             break;
         case ENFILE:
-            fprintf(DIAG_OUT, ">>> Too many open files for this system! <<<\n");
+            Rprintf( ">>> Too many open files for this system! <<<\n");
             break;
         case ENOENT:
-            fprintf(DIAG_OUT, ">>> File or directory not found! <<<\n");
+            Rprintf( ">>> File or directory not found! <<<\n");
             break;
         case ENOSPC:
-            fprintf(DIAG_OUT, ">>> No space left on device! <<<\n");
+            Rprintf( ">>> No space left on device! <<<\n");
             break;
         case EPERM:
-            fprintf(DIAG_OUT, ">>> Operation not permitted! <<<\n");
+            Rprintf( ">>> Operation not permitted! <<<\n");
             break;
         case EROFS:
-            fprintf(DIAG_OUT, ">>> File system is mounted read only! <<<\n");
+            Rprintf( ">>> File system is mounted read only! <<<\n");
             break;
         default:
-            fprintf(DIAG_OUT, ">>> ");
-            fprintf(DIAG_OUT, "%s", strerror(errno));
-            fprintf(DIAG_OUT, " <<<\n");
+            Rprintf( ">>> ");
+            Rprintf( "%s", strerror(errno));
+            Rprintf( " <<<\n");
             break;
     }
 }
@@ -481,14 +481,14 @@ void readConfigFile() {
     ADOLC_GLOBAL_TAPE_VARS.taylorBufferSize = TBUFSIZE;
     ADOLC_GLOBAL_TAPE_VARS.maxNumberTaylorBuffers = TBUFNUM;
     if ((configFile = fopen(".adolcrc", "r")) != NULL) {
-        fprintf(DIAG_OUT, "\nFile .adolcrc found! => Try to parse it!\n");
-        fprintf(DIAG_OUT, "****************************************\n");
+        Rprintf( "\nFile .adolcrc found! => Try to parse it!\n");
+        Rprintf( "****************************************\n");
         while (fgets(inputLine, ADOLC_LINE_LENGTH + 1, configFile) == inputLine) {
             if (strlen(inputLine) == ADOLC_LINE_LENGTH &&
                     inputLine[ADOLC_LINE_LENGTH - 1] != 0xA) {
-                fprintf(DIAG_OUT, "ADOL-C warning: Input line in .adolcrc exceeds"
+                Rprintf( "ADOL-C warning: Input line in .adolcrc exceeds"
                         " %d characters!\n", ADOLC_LINE_LENGTH);
-                fprintf(DIAG_OUT, "                => Parsing aborted!!\n");
+                Rprintf( "                => Parsing aborted!!\n");
                 break;
             }
             pos1 = strchr(inputLine, '"');
@@ -504,7 +504,7 @@ void readConfigFile() {
             }
             if (pos4 == NULL) {
                 if (pos1 != NULL)
-                    fprintf(DIAG_OUT, "ADOL-C warning: Malformed input line "
+                    Rprintf( "ADOL-C warning: Malformed input line "
                             "in .adolcrc ignored!\n");
             } else {
 		if (*(pos3 + 1) == '0' && (*(pos3 + 2) == 'x' || *(pos3 + 2) == 'X')) {
@@ -564,49 +564,49 @@ void readConfigFile() {
 				currpos += fnamelen;
 				*currpos = '\0';
 			    }
-			    fprintf(DIAG_OUT, "ADOL-C info: using TAPE_DIR %s for all disk bound tapes\n",path);
+			    Rprintf( "ADOL-C info: using TAPE_DIR %s for all disk bound tapes\n",path);
 			} else
-			    fprintf(DIAG_OUT, "ADOL-C warning: TAPE_DIR %s in .adolcrc is not an existing directory,\n will continue using %s for writing tapes\n", path, TAPE_DIR);
+			    Rprintf( "ADOL-C warning: TAPE_DIR %s in .adolcrc is not an existing directory,\n will continue using %s for writing tapes\n", path, TAPE_DIR);
 		    }
 		    else 
-			fprintf(DIAG_OUT, "ADOL-C warning: Unable to parse number in "
+			Rprintf( "ADOL-C warning: Unable to parse number in "
 				".adolcrc!\n");
                 } else {
                     *pos2 = 0;
                     *pos4 = 0;
                     if (strcmp(pos1 + 1, "OBUFSIZE") == 0) {
                         ADOLC_GLOBAL_TAPE_VARS.operationBufferSize = (locint)number;
-                        fprintf(DIAG_OUT, "Found operation buffer size: %u\n",
+                        Rprintf( "Found operation buffer size: %u\n",
                                 (locint)number);
                     } else if (strcmp(pos1 + 1, "LBUFSIZE") == 0) {
                         ADOLC_GLOBAL_TAPE_VARS.locationBufferSize = (locint)number;
-                        fprintf(DIAG_OUT, "Found location buffer size: %u\n",
+                        Rprintf( "Found location buffer size: %u\n",
                                 (locint)number);
                     } else if (strcmp(pos1 + 1, "VBUFSIZE") == 0) {
                         ADOLC_GLOBAL_TAPE_VARS.valueBufferSize = (locint)number;
-                        fprintf(DIAG_OUT, "Found value buffer size: %u\n",
+                        Rprintf( "Found value buffer size: %u\n",
                                 (locint)number);
                     } else if (strcmp(pos1 + 1, "TBUFSIZE") == 0) {
                         ADOLC_GLOBAL_TAPE_VARS.taylorBufferSize = (locint)number;
-                        fprintf(DIAG_OUT, "Found taylor buffer size: %u\n",
+                        Rprintf( "Found taylor buffer size: %u\n",
                                 (locint)number);
                     } else if (strcmp(pos1 + 1, "TBUFNUM") == 0) {
                         ADOLC_GLOBAL_TAPE_VARS.maxNumberTaylorBuffers = (int)number;
-                        fprintf(DIAG_OUT, "Found maximal number of taylor buffers: "
+                        Rprintf( "Found maximal number of taylor buffers: "
                                 "%d\n", (int)number);
                     } else if (strcmp(pos1 + 1, "INITLIVE") == 0) {
                         ADOLC_GLOBAL_TAPE_VARS.initialStoreSize = (locint)number;
-                        fprintf(DIAG_OUT, "Found initial live variable store size : %u\n",
+                        Rprintf( "Found initial live variable store size : %u\n",
                                 (locint)number);
                         checkInitialStoreSize(&ADOLC_GLOBAL_TAPE_VARS);
                     } else {
-                        fprintf(DIAG_OUT, "ADOL-C warning: Unable to parse "
+                        Rprintf( "ADOL-C warning: Unable to parse "
                                 "parameter name in .adolcrc!\n");
                     }
                 }
             }
         }
-        fprintf(DIAG_OUT, "****************************************\n\n");
+        Rprintf( "****************************************\n\n");
         fclose(configFile);
     }
     ADOLC_OPENMP_RESTORE_THREAD_NUMBER;
@@ -697,7 +697,7 @@ void taylor_begin(uint bufferSize, int degreeSave) {
     ADOLC_OPENMP_GET_THREAD_NUMBER;
     if (ADOLC_CURRENT_TAPE_INFOS.tayBuffer != NULL) {
         #     if defined(ADOLC_DEBUG)
-            fprintf(DIAG_OUT, "\nADOL-C warning: !!! Taylor information for tape %d"
+            Rprintf( "\nADOL-C warning: !!! Taylor information for tape %d"
                     " found that will be overwritten !!!\n\n",
                     ADOLC_CURRENT_TAPE_INFOS.tapeID);
         #     endif
@@ -765,11 +765,11 @@ void taylor_close(uint buffer) {
 
     #if defined(ADOLC_DEBUG)
     if (ADOLC_CURRENT_TAPE_INFOS.tay_file != NULL)
-        fprintf(DIAG_OUT, "\n ADOL-C debug: Taylor file of length %d bytes "
+        Rprintf( "\n ADOL-C debug: Taylor file of length %d bytes "
                 "completed\n",
                 (int)(ADOLC_CURRENT_TAPE_INFOS.numTays_Tape*sizeof(revreal)));
     else
-        fprintf(DIAG_OUT, "\n ADOL-C debug: Taylor array of length %d bytes "
+        Rprintf( "\n ADOL-C debug: Taylor array of length %d bytes "
                 "completed\n",
                 (int)(ADOLC_CURRENT_TAPE_INFOS.numTays_Tape*sizeof(revreal)));
     #endif
@@ -1462,7 +1462,7 @@ void set_param_vec(short tag, size_t numparam, revreal* paramvec) {
      * stack information */
     openTape(tag, ADOLC_FORWARD);
     if (ADOLC_CURRENT_TAPE_INFOS.stats[NUM_PARAM] != numparam) {
-        fprintf(DIAG_OUT, "ADOL-C error: Setting parameters on tape %d "
+        Rprintf( "ADOL-C error: Setting parameters on tape %d "
                 "aborted!\nNumber of parameters (%zu) passed"
                 " is inconsistent with number recorded on tape (%zu)\n",
                 tag, numparam, ADOLC_CURRENT_TAPE_INFOS.stats[NUM_PARAM]);
@@ -1859,13 +1859,13 @@ void put_op_block(unsigned char *lastOpP1) {
             fopen(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.op_fileName, "rb");
         if (ADOLC_CURRENT_TAPE_INFOS.op_file != NULL) {
 #if defined(ADOLC_DEBUG)
-            fprintf(DIAG_OUT, "ADOL-C debug: Old tapefile %s gets removed!\n",
+            Rprintf( "ADOL-C debug: Old tapefile %s gets removed!\n",
                     ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.op_fileName);
 #endif
             fclose(ADOLC_CURRENT_TAPE_INFOS.op_file);
             ADOLC_CURRENT_TAPE_INFOS.op_file = NULL;
             if (remove(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.op_fileName))
-                fprintf(DIAG_OUT, "ADOL-C warning: "
+                Rprintf( "ADOL-C warning: "
                         "Unable to remove old tapefile\n");
             ADOLC_CURRENT_TAPE_INFOS.op_file =
                 fopen(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.op_fileName, "wb");
@@ -1971,13 +1971,13 @@ void put_loc_block(locint *lastLocP1) {
             fopen(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.loc_fileName, "rb");
         if (ADOLC_CURRENT_TAPE_INFOS.loc_file != NULL) {
             #if defined(ADOLC_DEBUG)
-            fprintf(DIAG_OUT, "ADOL-C debug: Old tapefile %s gets removed!\n",
+            Rprintf( "ADOL-C debug: Old tapefile %s gets removed!\n",
                     ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.loc_fileName);
             #endif
             fclose(ADOLC_CURRENT_TAPE_INFOS.loc_file);
             ADOLC_CURRENT_TAPE_INFOS.loc_file = NULL;
             if (remove(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.loc_fileName))
-                fprintf(DIAG_OUT, "ADOL-C warning: "
+                Rprintf( "ADOL-C warning: "
                         "Unable to remove old tapefile!\n");
             ADOLC_CURRENT_TAPE_INFOS.loc_file =
                 fopen(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.loc_fileName, "wb");
@@ -2122,13 +2122,13 @@ void put_val_block(double *lastValP1) {
             fopen(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.val_fileName, "rb");
         if (ADOLC_CURRENT_TAPE_INFOS.val_file != NULL) {
             #if defined(ADOLC_DEBUG)
-            fprintf(DIAG_OUT, "ADOL-C debug: Old tapefile %s gets removed!\n",
+            Rprintf( "ADOL-C debug: Old tapefile %s gets removed!\n",
                     ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.val_fileName);
             #endif
             fclose(ADOLC_CURRENT_TAPE_INFOS.val_file);
             ADOLC_CURRENT_TAPE_INFOS.val_file = NULL;
             if (remove(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.val_fileName))
-                fprintf(DIAG_OUT, "ADOL-C warning: "
+                Rprintf( "ADOL-C warning: "
                         "Unable to remove old tapefile\n");
             ADOLC_CURRENT_TAPE_INFOS.val_file =
                 fopen(ADOLC_CURRENT_TAPE_INFOS.pTapeInfos.val_fileName, "wb");
@@ -2409,7 +2409,7 @@ unsigned char get_op_f() {
 
     temp = *ADOLC_CURRENT_TAPE_INFOS.currOp;
     ++ADOLC_CURRENT_TAPE_INFOS.currOp;
-    fprintf(DIAG_OUT, "f_op: %i\n", temp - '\0'); /* why -'\0' ??? kowarz */
+    Rprintf( "f_op: %i\n", temp - '\0'); /* why -'\0' ??? kowarz */
     return temp;
 }
 
@@ -2421,7 +2421,7 @@ unsigned char get_op_r() {
 
     --ADOLC_CURRENT_TAPE_INFOS.currOp;
     temp = *ADOLC_CURRENT_TAPE_INFOS.currOp;
-    fprintf(DIAG_OUT, "r_op: %i\n", temp - '\0');
+    Rprintf( "r_op: %i\n", temp - '\0');
     return temp;
 }
 
@@ -2433,7 +2433,7 @@ locint get_locint_f() {
 
     temp = *ADOLC_CURRENT_TAPE_INFOS.currLoc;
     ++ADOLC_CURRENT_TAPE_INFOS.currLoc;
-    fprintf(DIAG_OUT, "f_loc: %i\n", temp);
+    Rprintf( "f_loc: %i\n", temp);
     return temp;
 }
 
@@ -2445,7 +2445,7 @@ locint get_locint_r() {
 
     --ADOLC_CURRENT_TAPE_INFOS.currLoc;
     temp = *ADOLC_CURRENT_TAPE_INFOS.currLoc;
-    fprintf(DIAG_OUT, "r_loc: %i\n", temp);
+    Rprintf( "r_loc: %i\n", temp);
     return temp;
 }
 
@@ -2457,7 +2457,7 @@ double get_val_f() {
 
     temp = *ADOLC_CURRENT_TAPE_INFOS.currVal;
     ++ADOLC_CURRENT_TAPE_INFOS.currVal;
-    fprintf(DIAG_OUT, "f_val: %e\n", temp);
+    Rprintf( "f_val: %e\n", temp);
     return temp;
 }
 
@@ -2469,7 +2469,7 @@ double get_val_r() {
 
     --ADOLC_CURRENT_TAPE_INFOS.currVal;
     temp = *ADOLC_CURRENT_TAPE_INFOS.currVal;
-    fprintf(DIAG_OUT, "r_val: %e\n", temp);
+    Rprintf( "r_val: %e\n", temp);
     return temp;
 }
 

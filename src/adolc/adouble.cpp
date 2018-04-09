@@ -1462,7 +1462,7 @@ adouble pow ( double coval, const badouble& y ) {
     adouble ret;
 
     if (coval <= 0) {
-        fprintf(DIAG_OUT,"\nADOL-C message:  exponent at zero/negative constant basis deactivated\n");
+        Rprintf("\nADOL-C message:  exponent at zero/negative constant basis deactivated\n");
     }
 
     condassign (ret, (adouble) coval, exp(y*ADOLC_MATH_NSP::log(coval)),
@@ -1480,9 +1480,9 @@ adouble pow ( const badouble& x, const badouble& y) {
 
     if (!(vx > 0)) { 
         if (vx < 0 || vy >= 0)
-            fprintf(DIAG_OUT,"\nADOL-C message: exponent of zero/negative basis deactivated\n");
+            Rprintf("\nADOL-C message: exponent of zero/negative basis deactivated\n");
         else
-            fprintf(DIAG_OUT,"\nADOL-C message: negative exponent and zero basis deactivated\n");
+            Rprintf("\nADOL-C message: negative exponent and zero basis deactivated\n");
     }
     condassign(a1, -y, (adouble) ADOLC_MATH_NSP::pow(vx,vy), pow(x,vy));
     condassign(a2, fabs(x), pow(x, vy), a1);

@@ -239,7 +239,7 @@ void extend_nonlinearity_domain_binary
 #if defined(_HOV_WK_) /* keep in this vector mode */
 #define IF_KEEP_TAYLOR_CLOSE \
 if (keep){\
-  fprintf(DIAG_OUT,"Succeeding reverse sweep will fail!\n");\
+  Rprintf("Succeeding reverse sweep will fail!\n");\
   taylor_close(0);\
 }
 #define IF_KEEP_WRITE_TAYLOR(res,keep,k,p) \
@@ -259,7 +259,7 @@ if (keep){\
 #else /* _ZOS_, _FOS_, _HOS_ */
 #define IF_KEEP_TAYLOR_CLOSE \
 if (keep){\
-  fprintf(DIAG_OUT,"Otherwise succeeding reverse sweep will fail!\n");\
+  Rprintf("Otherwise succeeding reverse sweep will fail!\n");\
   taylor_close(0);\
 }
 #if defined(_ZOS_)
@@ -1116,16 +1116,16 @@ int  hov_forward(
 #if defined(ADOLC_DEBUG)
     /****************************************************************************/
     /*                                                           DEBUG MESSAGES */
-    fprintf(DIAG_OUT,"Call of %s(..) with tag: %d, n: %d, m %d,\n",
+    Rprintf("Call of %s(..) with tag: %d, n: %d, m %d,\n",
             GENERATED_FILENAME, tnum, indcheck, depcheck);
 #if defined(_KEEP_)
-    fprintf(DIAG_OUT,"                    keep: %d\n", keep);
+    Rprintf("                    keep: %d\n", keep);
 #endif
 #if defined(_HIGHER_ORDER_)
-    fprintf(DIAG_OUT,"                    degree: %d\n",gdegree);
+    Rprintf("                    degree: %d\n",gdegree);
 #endif
 #if defined(_ADOLC_VECTOR_)
-    fprintf(DIAG_OUT,"                    p: %d\n\n",p);
+    Rprintf("                    p: %d\n\n",p);
 #endif
 
 #endif
@@ -1142,7 +1142,7 @@ int  hov_forward(
 
       if ( (depcheck != ADOLC_CURRENT_TAPE_INFOS.stats[NUM_DEPENDENTS]) ||
             (indcheck != ADOLC_CURRENT_TAPE_INFOS.stats[NUM_INDEPENDENTS]) ) {
-        fprintf(DIAG_OUT,"ADOL-C error: forward sweep on tape %d  aborted!\n"
+        Rprintf("ADOL-C error: forward sweep on tape %d  aborted!\n"
                 "Number of dependent(%u) and/or independent(%u) variables passed"
                 " to forward is\ninconsistent with number "
                 "recorded on tape (%zu, %zu) \n", tnum,
@@ -1153,14 +1153,14 @@ int  hov_forward(
     }
 #if defined(_ABS_NORM_) || defined(_ABS_NORM_SIG_)
       if (! ADOLC_CURRENT_TAPE_INFOS.stats[NO_MIN_MAX] ) {
-	  fprintf(DIAG_OUT,"ADOL-C error: tape %d was not created compatible "
+	  Rprintf("ADOL-C error: tape %d was not created compatible "
 		  "with %s\n              Please call enableMinMaxUsingAbs() "
 		  "before trace_on(%d)\n", tnum, __FUNCTION__, tnum);
 	  adolc_exit(-1,"",__func__,__FILE__,__LINE__);
       }
 #if defined(_ABS_NORM_SIG_) || defined(_INDOPRO_)
       if (swcheck != ADOLC_CURRENT_TAPE_INFOS.stats[NUM_SWITCHES]) {
-        fprintf(DIAG_OUT,"ADOL-C error: forward sweep on tape %d  aborted!\n"
+        Rprintf("ADOL-C error: forward sweep on tape %d  aborted!\n"
                 "Number of switches(%u) passed"
                 " to forward is\ninconsistent with number "
                 "recorded on tape (%zu) \n", tnum,
@@ -1196,7 +1196,7 @@ int  hov_forward(
 
 #if defined(_KEEP_)
     if (keep>1) {
-        fprintf(DIAG_OUT,"\n ADOL-C error: zero order scalar forward cannot save"
+        Rprintf("\n ADOL-C error: zero order scalar forward cannot save"
                 " more\nthan zero order taylor coefficients!\n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
@@ -1214,7 +1214,7 @@ int  hov_forward(
 #if defined(_FOS_)
 #if defined(_KEEP_)
     if (keep>2) {
-        fprintf(DIAG_OUT,"\n ADOL-C error: first order scalar forward cannot save"
+        Rprintf("\n ADOL-C error: first order scalar forward cannot save"
                 " more  \nthan first order taylor coefficients!\n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
@@ -1396,7 +1396,7 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
                 if (dp_T0[arg] != 0) {
                     if (ADOLC_GLOBAL_TAPE_VARS.branchSwitchWarning)
-                        fprintf(DIAG_OUT,
+                        Rprintf(
                                 "ADOL-C Warning: Branch switch detected in comparison "
                                 "(operator eq_zero).\n"
                                 "Forward sweep aborted! Retaping recommended!\n");
@@ -1415,7 +1415,7 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
                 if (dp_T0[arg] == 0) {
                     if (ADOLC_GLOBAL_TAPE_VARS.branchSwitchWarning)
-                        fprintf(DIAG_OUT,
+                        Rprintf(
                                 "ADOL-C Warning: Branch switch detected in comparison "
                                 "(operator neq_zero).\n"
                                 "Forward sweep aborted! Retaping recommended!\n");
@@ -1433,7 +1433,7 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
                 if (dp_T0[arg] > 0) {
                     if (ADOLC_GLOBAL_TAPE_VARS.branchSwitchWarning)
-                        fprintf(DIAG_OUT,
+                        Rprintf(
                                 "ADOL-C Warning: Branch switch detected in comparison "
                                 "(operator le_zero).\n"
                                 "Forward sweep aborted! Retaping recommended!\n");
@@ -1453,7 +1453,7 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
                 if (dp_T0[arg] <= 0) {
                     if (ADOLC_GLOBAL_TAPE_VARS.branchSwitchWarning)
-                        fprintf(DIAG_OUT,
+                        Rprintf(
                                 "ADOL-C Warning: Branch switch detected in comparison "
                                 "(operator gt_zero).\n"
                                 "Forward sweep aborted! Retaping recommended!\n");
@@ -1471,7 +1471,7 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
                 if (dp_T0[arg] < 0) {
                     if (ADOLC_GLOBAL_TAPE_VARS.branchSwitchWarning)
-                        fprintf(DIAG_OUT,
+                        Rprintf(
                                 "ADOL-C Warning: Branch switch detected in comparison "
                                 "(operator ge_zero).\n"
                                 "Forward sweep aborted! Retaping recommended!\n");
@@ -1491,7 +1491,7 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
                 if (dp_T0[arg] >= 0) {
                     if (ADOLC_GLOBAL_TAPE_VARS.branchSwitchWarning)
-                        fprintf(DIAG_OUT,
+                        Rprintf(
                                 "ADOL-C Warning: Branch switch detected in comparison "
                                 "(operator lt_zero).\n"
                                 "Forward sweep aborted! Retaping recommended!\n");
@@ -4084,7 +4084,7 @@ int  hov_forward(
 
 #if !defined(_NTIGHT_)
                 if (get_val_f()!=dp_T0[arg1]) {
-                    fprintf(DIAG_OUT,
+                    Rprintf(
                             "ADOL-C Warning: forward sweep aborted; tape invalid!\n");
                     IF_KEEP_TAYLOR_CLOSE
                     end_sweep();
@@ -4104,7 +4104,7 @@ int  hov_forward(
 #endif /* !_NTIGHT_ */
 
 #if defined(_INDO_)
-               fprintf(DIAG_OUT,
+               Rprintf(
                     "ADOL-C Warning: forward sweep aborted; sparse mode not available for gen_quad!\n");
                end_sweep();
                return -2;
@@ -4789,7 +4789,7 @@ int  hov_forward(
 			break;
 		    }
 		    if (retval != coval && ADOLC_GLOBAL_TAPE_VARS.branchSwitchWarning)
-			fprintf(DIAG_OUT,
+			Rprintf(
 				"ADOL-C Warning: Branch switch detected in comparison "
 				"(operator %s).\n"
 				"Results may be unpredictable! Retaping recommended!\n",opname);
@@ -4837,7 +4837,7 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
 		    idx = (size_t)trunc(fabs(dp_T0[arg]));
 		    if (idx >= numvar)
-			fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting n=%zu, idx=%zu\n", numvar, idx);
+			Rprintf( "ADOL-C warning: index out of bounds while subscripting n=%zu, idx=%zu\n", numvar, idx);
 		    arg1 = vectorloc+idx;
 		    IF_KEEP_WRITE_TAYLOR(res,keep,k,p);
 		    dp_T0[res] = dp_T0[arg1];
@@ -4858,7 +4858,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		    fprintf(DIAG_OUT, "ADOL-C error: active subscripting does not work in safe mode, please use tight mode\n");
+		    Rprintf( "ADOL-C error: active subscripting does not work in safe mode, please use tight mode\n");
 		    adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
 		}
@@ -4881,12 +4881,12 @@ int  hov_forward(
 #if !defined(_NTIGHT_)
 		    idx = (size_t)trunc(fabs(dp_T0[arg]));
 		    if (idx >= numvar)
-			fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting (ref) n=%zu, idx=%zu\n", numvar, idx);
+			Rprintf( "ADOL-C warning: index out of bounds while subscripting (ref) n=%zu, idx=%zu\n", numvar, idx);
 		    arg1 = vectorloc+idx;
 		    IF_KEEP_WRITE_TAYLOR(res,keep,k,p);
 		    dp_T0[res] = arg1;
 #else
-		    fprintf(DIAG_OUT, "ADOL-C error: active subscripting does not work in safe mode, please use tight mode\n");
+		    Rprintf( "ADOL-C error: active subscripting does not work in safe mode, please use tight mode\n");
 		    adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif
 		}
@@ -4916,7 +4916,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
 		break;
@@ -4928,7 +4928,7 @@ int  hov_forward(
 		IF_KEEP_WRITE_TAYLOR(arg1,keep,k,p);
 		dp_T0[arg1]++;
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif
 		break;
@@ -4940,7 +4940,7 @@ int  hov_forward(
 		IF_KEEP_WRITE_TAYLOR(arg1,keep,k,p);
 		dp_T0[arg1]--;
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif
 		break;
@@ -4975,7 +4975,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif
 		break;
@@ -5010,7 +5010,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif
 		break;
@@ -5041,7 +5041,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif
 		break;
@@ -5072,7 +5072,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif
 		break;
@@ -5103,7 +5103,7 @@ int  hov_forward(
 #endif
 #endif 
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
                 break;
@@ -5143,7 +5143,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
                 ++indexi;
@@ -5163,7 +5163,7 @@ int  hov_forward(
                 IF_KEEP_WRITE_TAYLOR(res,keep,k,p)
                 dp_T0[res] += coval;
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -5182,7 +5182,7 @@ int  hov_forward(
                 IF_KEEP_WRITE_TAYLOR(res,keep,k,p)
                 dp_T0[res] += coval;
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -5222,7 +5222,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
                 break;
@@ -5240,7 +5240,7 @@ int  hov_forward(
                 IF_KEEP_WRITE_TAYLOR(res,keep,k,p)
                 dp_T0[res] -= coval;
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -5258,7 +5258,7 @@ int  hov_forward(
                 IF_KEEP_WRITE_TAYLOR(res,keep,k,p)
                 dp_T0[res] -= coval;
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -5298,7 +5298,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
                 break;
@@ -5328,7 +5328,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
                 break;
@@ -5358,7 +5358,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
                 break;
@@ -5417,7 +5417,7 @@ int  hov_forward(
 #endif
 		dp_T0[res] *= dp_T0[arg];
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -5715,7 +5715,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
 		}
@@ -5780,7 +5780,7 @@ int  hov_forward(
 #endif
 #endif
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
+		Rprintf( "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* ALL_TOGETHER_AGAIN */
                 break;
@@ -6229,7 +6229,7 @@ int  hov_forward(
             default:                                                   /* default */
                 /* Die here, we screwed up */
 
-                fprintf(DIAG_OUT,"ADOL-C fatal error in " GENERATED_FILENAME " ("
+                Rprintf("ADOL-C fatal error in " GENERATED_FILENAME " ("
                         __FILE__
                         ") : no such operation %d\n", operation);
                 adolc_exit(-1,"",__func__,__FILE__,__LINE__);
@@ -6337,7 +6337,7 @@ int get_num_switches(short tapeID) {
 
     init_for_sweep(tapeID);
     if (!ADOLC_CURRENT_TAPE_INFOS.stats[NO_MIN_MAX]) {
-	fprintf(DIAG_OUT,"ADOL-C error: tape %d was not created compatible "
+	Rprintf("ADOL-C error: tape %d was not created compatible "
 		"with %s\n              Please call enableMinMaxUsingAbs() "
 		"before trace_on(%d)\n", tapeID, __FUNCTION__, tapeID);
 	adolc_exit(-1,"",__func__,__FILE__,__LINE__);
