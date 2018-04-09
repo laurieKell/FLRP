@@ -9,6 +9,12 @@ setGeneric('FLBRP', function(object, sr, ...)
 # }}}
 
 # methods
+setGeneric('availability', function(object, ...)
+		standardGeneric('availability'))
+
+setGeneric('availability<-', function(object, ..., value)
+		standardGeneric('availability<-'))
+
 setGeneric('biomass.obs', function(object, ...)
 		standardGeneric('biomass.obs'))
 
@@ -18,11 +24,50 @@ setGeneric('brp', function(object, ...)
 setGeneric('catch.obs', function(object, ...)
 		standardGeneric('catch.obs'))
 
-setGeneric('computeFbar', function(object, ...)
-		standardGeneric('computeFbar'))
+setGeneric('bycatch.harvest', function(object, ...)
+		standardGeneric('bycatch.harvest'))
+
+setGeneric('bycatch.harvest<-', function(object, ..., value)
+		standardGeneric('bycatch.harvest<-'))
+
+setGeneric('bycatch.wt', function(object, ...)
+		standardGeneric('bycatch.wt'))
+
+setGeneric('bycatch.wt<-', function(object, ..., value)
+		standardGeneric('bycatch.wt<-'))
+
+setGeneric('discards.obs', function(object, ...)
+    standardGeneric('discards.obs'))
+
+setGeneric('discards.obs<-', function(object, ..., value)
+    standardGeneric('discards.obs<-'))
+
+setGeneric('fbar<-', function(object, ..., value)
+		standardGeneric('fbar<-'))
+
+setGeneric('fbar.obs', function(object, ...)
+		standardGeneric('fbar.obs'))
+
+setGeneric('fbar.obs<-', function(object, ..., value)
+		standardGeneric('fbar.obs<-'))
 
 setGeneric('hcrYield', function(object, fbar, ...)
 		standardGeneric('hcrYield'))
+
+setGeneric('landings.obs', function(object, ...)
+		standardGeneric('landings.obs'))
+
+setGeneric('landings.obs<-', function(object, ..., value)
+		standardGeneric('landings.obs<-'))
+
+setGeneric('profit.obs', function(object, ...)
+		standardGeneric('profit.obs'))
+
+setGeneric('profit.obs<-', function(object, ..., value)
+		standardGeneric('profit.obs<-'))
+
+setGeneric('rec.obs<-', function(object, ..., value)
+		standardGeneric('rec.obs<-'))
 
 setGeneric('refpts', function(object, ...)
 		standardGeneric('refpts'))
@@ -32,6 +77,18 @@ setGeneric('refpts<-', function(object, ..., value)
 
 setGeneric('spr', function(object, ...)
 		standardGeneric('spr'))
+
+setGeneric('ssb.obs', function(object, ...)
+		standardGeneric('ssb.obs'))
+
+setGeneric('ssb.obs<-', function(object, ..., value)
+		standardGeneric('ssb.obs<-'))
+
+setGeneric('stock.obs', function(object, ...)
+		standardGeneric('stock.obs'))
+
+setGeneric('stock.obs<-', function(object, ..., value)
+		standardGeneric('stock.obs<-'))
 
 setGeneric('yield.obs', function(object, ...)
 		standardGeneric('yield.obs'))

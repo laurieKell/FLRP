@@ -6,56 +6,65 @@
 #
 # Distributed under the terms of the GNU Public License v 3.0
 
-# createFLAccessors {{{
+# createFLAccesors    {{{
+
+#' Create accesor methods for a given class
+#' 
+#' This function creates a complete set of standard S4 class accessors and
+#' replacers. Not intended for direct use.
+#'
+#' @param class name of the class
+#' @param exclude Slot names to exclude
+#' @param include Slot names to include
+#' @author The FLR Team
+#' @keywords methods
+#'
 createFLAccesors <- function(class, exclude=character(1), include=missing) {
   
   object <- class
 
   if(!missing(include))
-  	slots <- getSlots(class)[include]
+    slots <- getSlots(class)[include]
   else
-  	slots <- getSlots(class)[!names(getSlots(class))%in%exclude]
+    slots <- getSlots(class)[!names(getSlots(class))%in%exclude]
 
-	defined <- list()
+  defined <- list()
 
-	for (x in names(slots)) {
-		# check method is defined already and signatures match
-		eval(
-		substitute(if(isGeneric(x) && names(formals(x)) != "object") {warning(paste("Accesor
-			method for", x, "conflicts with a differently defined generic. Type", x,
-			"for more information")); break}, list(x=x))
-			)
-		# create new generic and accesor method
-		eval(
-		substitute(if(!isGeneric(x)) setGeneric(x, function(object, ...) standardGeneric(x)),
-		list(x=x))
-		)
-		eval(
-		substitute(setMethod(x, signature(y), function(object) return(slot(object, x))),
-      list(x=x, y=class))
-		)
-		# create replacement method
-		xr <- paste(x, "<-", sep="")
-		eval(
-		substitute(if(!isGeneric(x)) setGeneric(x,
-			function(object, ..., value) standardGeneric(x)), list(x=xr))
-		)
-		eval(
-		substitute(setMethod(x, signature(object=y, value=v), function(object, value)
-			{slot(object, s) <- value; if(validObject(object)) object else stop("")}),
-      list(x=xr, y=class, s=x, v=unname(slots[x])))
-		)
-    if(any(unname(slots[x]) %in% c('FLArray', 'FLQuant', 'FLCohort', 'refpts', 'FLPar')))
+  for (x in names(slots)) {
+    # check method is defined already and signatures match
+  eval(
+    substitute(if(!is.null(getGeneric(x)) && names(formals(x)) != "object") {
+      warning(paste("Accesor method for", x, "conflicts with a differently defined 
+      generic. Type", x, "for more information")); break}, list(x=x))
+    )
+    # accessor
     eval(
-		substitute(setMethod(x, signature(object=y, value="numeric"), function(object, value)
-			{slot(object, s)[] <- value; object}), list(x=xr, y=object, s=x))
-		)
-		defined[[x]] <- c(x, xr, paste('alias{',x,',', class,'-method}', sep=''),
-			paste('\alias{',xr,',', class,',',unname(slots[x]), '-method}', sep=''),
-			paste('\alias{',x,'-methods}', sep=''),
-			paste('\alias{"',xr, '"-methods}', sep='')
-		)
-	}
-	return(defined)} # }}}
+    substitute(setMethod(x, signature(object=y),
+      function(object) return(slot(object, x))),
+      list(x=x, y=class))
+    )
+    # replacer
+    eval(
+    substitute(setReplaceMethod(x, signature(object=y, value=v),
+      function(object, value)
+      {slot(object, s) <- value; if(validObject(object)) object else
+        stop("Object not valid")}),
+      list(x=x, y=class, s=x, v=unname(slots[x])))
+    )
+    if(any(unname(slots[x]) %in% c('FLArray', 'FLQuant', 'FLCohort')))
+    eval(
+    substitute(setReplaceMethod(x, signature(object=y, value="numeric"),
+      function(object, value)
+      {slot(object, s)[] <- value; object}), list(x=x, y=object, s=x))
+    )
+    xr <- paste(x, "<-", sep="")
+    defined[[x]] <- c(x, xr, paste('alias{',x,',', class,'-method}', sep=''),
+      paste('\alias{',xr,',', class,',',unname(slots[x]), '-method}', sep=''),
+      paste('\alias{',x,'-methods}', sep=''),
+      paste('\alias{"',xr, '"-methods}', sep='')
+    )
+  }
+  return(defined)
+}  # }}}
 
 invisible(createFLAccesors("FLBRP", exclude=c("range", "name", "desc", "refpts")))

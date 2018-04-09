@@ -74,6 +74,8 @@ exportMethods(
   "sbmsy",
   "spr",
   "spr0",
+  "ssb",
+  "ssb.obs",
   "stock.n",
   "summary",
   "yield.obs",

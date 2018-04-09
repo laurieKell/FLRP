@@ -148,13 +148,6 @@ setMethod('yield.obs', signature(object='FLBRP'),
     return(landings.obs(object))
   }) # }}}
 
-# computeFbar {{{
-setMethod('computeFbar', signature(object='FLBRP'),
-  function(object) {
-    return(apply(harvest(object)[
-      ac(object@range["minfbar"]:object@range["maxfbar"])], c(2:6),mean))
-  }) # }}}
-
 # rec {{{
 setMethod('rec', signature(object='FLBRP'),
   function(object) {
@@ -308,16 +301,10 @@ setMethod('profit', signature(object='FLBRP'),
 #' @seealso \code{\link{refpts}} 
 #' 
 #' @examples
-#' \dontrun{
-#' library(FLBRP)
+#' data(ple4brp)
 #' 
-#' data(ple4)
-#' ple4.sr=fmle(as.FLSR(ple4,model="bevholt"))
-#' 
-#' ple4.eql=FLBRP(ple4,sr=ple4.sr)
-#' 
-#' msyRange(ple4.eql)
-#' }
+#' msyRange(ple4brp)
+
 setMethod("msyRange", signature(object="FLBRP"),
   function(object, range=0.10) {
 
@@ -358,3 +345,55 @@ setMethod("msyRange", signature(object="FLBRP"),
     refpts(brp(object))
   }
 ) # }}}
+
+# r {{{
+
+#' @title Intrisic rate of increase
+#' 
+#' @description 
+#' Calculates the value of *r*, the intrisic rate of increase. 
+#' 
+#' @param m An object of class `FLBRP`
+#' 
+#' @return object of class \code{FLQuant} with *r* estimate
+#' 
+#' @docType methods
+#' @rdname r
+#' 
+#' @seealso [FLCore::r()] 
+#' 
+#' @examples
+#' data(ple4brp)
+#'
+#' r(ple4brp)
+
+setMethod("r", signature(m="FLBRP", fec="missing"),
+	function(m, by = 'year', method = 'el',...)
+    do.call('r', list(m=m(m), fec=mat(m), by=by, method=method)))
+# }}}
+
+# sp {{{
+
+#' @title Surplus production
+#' 
+#' @description 
+#' Calculates the surplus production. 
+#' 
+#' @param m An object of class `FLBRP`
+#' 
+#' @return object of class \code{FLQuant} with *sp* estimate
+#' 
+#' @docType methods
+#' @rdname sp
+#' 
+#' @seealso [FLCore::sp()] 
+#' 
+#' @examples
+#' data(ple4brp)
+#'
+#' sp(ple4brp)
+
+setMethod('sp', signature(stock='FLBRP', catch='missing'),
+	function(stock, rel=TRUE)
+    return(sp(ssb.obs(stock), catch.obs(stock), rel=rel)))
+# }}}
