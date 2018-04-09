@@ -8,12 +8,24 @@
 
 # spr {{{
 
+#' @title Spawners per recruit
+#' 
+#' @description 
+#' Calculates the spawners per recruit (`spr`) at each level of fishing mortality (F)
+#' in the `fbar` slot, or the spawners per recruit when F=0 (`spr0`).
+#' 
+#' @param object An object of class `FLBRP`
+#' 
+#' @return An object of class \code{FLQuant}.
+#' 
+#' @docType methods
 #' @rdname spr
-#' @aliases spr,FLBRP-method
+#' 
 #' @examples
 #' data(ple4brp)
 #'
 #' spr(ple4brp)
+#' spr0(ple4brp)
 
 setMethod('spr', signature(object='FLBRP'),
   function(object) {

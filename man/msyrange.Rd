@@ -19,16 +19,9 @@ object of class \code{FLPar} with reference point quantities
 Calculates the values of fishing mortality, biomass, SSB etc. for a range of yields either side of MSY.
 }
 \examples{
-\dontrun{
-library(FLBRP)
+data(ple4brp)
 
-data(ple4)
-ple4.sr=fmle(as.FLSR(ple4,model="bevholt"))
-
-ple4.eql=FLBRP(ple4,sr=ple4.sr)
-
-msyRange(ple4.eql)
-}
+msyRange(ple4brp)
 }
 \seealso{
 \code{\link{refpts}}

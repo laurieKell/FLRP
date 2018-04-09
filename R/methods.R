@@ -9,6 +9,29 @@
 # Distributed under the terms of the GNU Public License v 3.0
 
 # brp {{{
+
+#' @title Fit an FLBRP object
+#' 
+#' @description 
+#' This method carries out the necessary calculation to obtain the reference
+#' points for an object of class `FLBRP`. Results of the calculation are stored
+#' in `@refpts` slot of the object, and the object is then returned.
+#' 
+#' @param object An object of class `FLBRP`
+#' 
+#' @return An object of class \code{FLBRP} with reference points estimated
+#' 
+#' @docType methods
+#' @rdname brp
+#' 
+#' @seealso [FLBRP] 
+#' 
+#' @examples
+#' data(ple4brp)
+#'
+#' ple4brp <- brp(ple4brp)
+#' refpts(ple4brp)
+
 setMethod('brp', signature(object='FLBRP'),
   function(object)
   {

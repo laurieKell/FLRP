@@ -33,71 +33,71 @@ of an stock assessment model fit, usually provided as two objects of class
 \section{Slots}{
 
 \describe{
-\item{\code{model}}{The formula for the stock-recruitment model, `formula,`.}
+\item{\code{model}}{The formula for the stock-recruitment model, \code{formula,}.}
 
-\item{\code{params}}{Parameters of the stock-recruitment relationship, `FLPar,`.}
+\item{\code{params}}{Parameters of the stock-recruitment relationship, \code{FLPar,}.}
 
-\item{\code{refpts}}{The estimated reference points, `FLPar,`.}
+\item{\code{refpts}}{The estimated reference points, \code{FLPar,}.}
 
-\item{\code{fbar}}{A vector of mean fishing mortality values for calculating the reference points, `FLQuant,`.}
+\item{\code{fbar}}{A vector of mean fishing mortality values for calculating the reference points, \code{FLQuant,}.}
 
-\item{\code{fbar.obs}}{The time series of observed mean fishing mortality, `FLQuant,`.}
+\item{\code{fbar.obs}}{The time series of observed mean fishing mortality, \code{FLQuant,}.}
 
-\item{\code{landings.obs}}{The time series of observed total landings, `FLQuant,`.}
+\item{\code{landings.obs}}{The time series of observed total landings, \code{FLQuant,}.}
 
-\item{\code{discards.obs}}{The time series of observed total discards, `FLQuant,`.}
+\item{\code{discards.obs}}{The time series of observed total discards, \code{FLQuant,}.}
 
-\item{\code{rec.obs}}{The time series of observed recruitment, `FLQuant,`.}
+\item{\code{rec.obs}}{The time series of observed recruitment, \code{FLQuant,}.}
 
-\item{\code{ssb.obs}}{The time series of observed spawning stock biomasses, `FLQuant,`.}
+\item{\code{ssb.obs}}{The time series of observed spawning stock biomasses, \code{FLQuant,}.}
 
-\item{\code{stock.obs}}{The time series of observed total stock abundance, `FLQuant,`.}
+\item{\code{stock.obs}}{The time series of observed total stock abundance, \code{FLQuant,}.}
 
-\item{\code{profit.obs}}{The time series of profits, `FLQuant,`.}
+\item{\code{profit.obs}}{The time series of profits, \code{FLQuant,}.}
 
-\item{\code{landings.sel}}{Selectivity at age for the landings, `FLQuant,`.}
+\item{\code{landings.sel}}{Selectivity at age for the landings, \code{FLQuant,}.}
 
-\item{\code{discards.sel}}{Selectivity at age for the discards, `FLQuant,`.}
+\item{\code{discards.sel}}{Selectivity at age for the discards, \code{FLQuant,}.}
 
-\item{\code{bycatch.harvest}}{X, Fishing mortality at age of bycatch species, `FLQuant,`.}
+\item{\code{bycatch.harvest}}{X, Fishing mortality at age of bycatch species, \code{FLQuant,}.}
 
-\item{\code{stock.wt}}{Mean weight-at-age in the stock to use in calculations, `FLQuant,`.}
+\item{\code{stock.wt}}{Mean weight-at-age in the stock to use in calculations, \code{FLQuant,}.}
 
-\item{\code{landings.wt}}{Mean weight-at-age in the landings to use in calculations, `FLQuant,`.}
+\item{\code{landings.wt}}{Mean weight-at-age in the landings to use in calculations, \code{FLQuant,}.}
 
-\item{\code{discards.wt}}{Mean weight-at-age in the discards to use in calculations, `FLQuant,`.}
+\item{\code{discards.wt}}{Mean weight-at-age in the discards to use in calculations, \code{FLQuant,}.}
 
-\item{\code{bycatch.wt}}{Mean weight-at-age in the bycatch to use in calculations, `FLQuant,`.}
+\item{\code{bycatch.wt}}{Mean weight-at-age in the bycatch to use in calculations, \code{FLQuant,}.}
 
-\item{\code{m}}{Natural mortality at age, `FLQuant,`.}
+\item{\code{m}}{Natural mortality at age, \code{FLQuant,}.}
 
-\item{\code{mat}}{Maturity at age, `FLQuant,`.}
+\item{\code{mat}}{Maturity at age, \code{FLQuant,}.}
 
-\item{\code{harvest.spwn}}{Proportion of harvest/fishing mortality before spawning, `FLQuant,`.}
+\item{\code{harvest.spwn}}{Proportion of harvest/fishing mortality before spawning, \code{FLQuant,}.}
 
-\item{\code{m.spwn}}{Proportion of natural mortality before spawning, `FLQuant,`.}
+\item{\code{m.spwn}}{Proportion of natural mortality before spawning, \code{FLQuant,}.}
 
-\item{\code{availability}}{, `FLQuant,`.}
+\item{\code{availability}}{, \code{FLQuant,}.}
 
-\item{\code{price}}{Price at age, `FLQuant,`.}
+\item{\code{price}}{Price at age, \code{FLQuant,}.}
 
-\item{\code{vcost}}{X, `FLQuant,`.}
+\item{\code{vcost}}{X, \code{FLQuant,}.}
 
-\item{\code{fcost}}{X, `FLQuant,`.}
+\item{\code{fcost}}{X, \code{FLQuant,}.}
 }}
 
 \section{Validity}{
 
 
-  \describe{
-    \item{\code{.obs} slots dims 1:5}{Slots containing observations, named
-      \code{*.obs}, must share dimensions 1 to 5}
-    \item{by-age slots dims 1:5}{Slots containing vectors of values at age,
-       must share dimensions 1 to 5}
+\describe{
+\item{\code{.obs} slots dims 1:5}{Slots containing observations, named
+\code{*.obs}, must share dimensions 1 to 5}
+\item{by-age slots dims 1:5}{Slots containing vectors of values at age,
+must share dimensions 1 to 5}
 }
 
 You can inspect the class validity function by using
-   \code{getValidity(getClassDef('FLBRP'))}
+\code{getValidity(getClassDef('FLBRP'))}
 }
 
 \section{Accessors}{
@@ -130,7 +130,7 @@ of class \code{formula}.
 Methods exist for various calculations based on values stored in the class:
 
 \describe{
-    \item{METHOD}{Neque porro quisquam est qui dolorem ipsum.}
+\item{METHOD}{Neque porro quisquam est qui dolorem ipsum.}
 }
 }
 
