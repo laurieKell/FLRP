@@ -85,6 +85,8 @@ exportMethods(
   "profit.obs<-",
   "rec.obs",
   "rec.obs<-",
+  "refpts",
+  "refpts<-",
   "ssb.obs",
   "ssb.obs<-",
   "stock.obs",
