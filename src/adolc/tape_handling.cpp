@@ -167,9 +167,6 @@ void StoreManagerLocint::grow(size_t mingrow) {
 
     if (maxsize > std::numeric_limits<locint>::max()) {
       // encapsulate this error message
-      fprintf(DIAG_OUT,"\nADOL-C error:\n");
-      fprintf(DIAG_OUT,"maximal number (%d) of live active variables exceeded\n\n", 
-	      std::numeric_limits<locint>::max());
       adolc_exit(-3,"",__func__,__FILE__,__LINE__);
     }
 
@@ -342,10 +339,6 @@ int initNewTape(short tapeID) {
                     if ( (*tiIter)->stats[OP_FILE_ACCESS]  == 0 &&
                             (*tiIter)->stats[LOC_FILE_ACCESS] == 0 &&
                             (*tiIter)->stats[VAL_FILE_ACCESS] == 0  ) {
-#              if defined(ADOLC_DEBUG)
-                        fprintf(DIAG_OUT, "\nADOL-C warning: Tape %d existed in main memory"
-                                " only and gets overwritten!\n\n", tapeID);
-#              endif
                         /* free associated resources */
                         retval = 1;
                     }
@@ -1400,9 +1393,6 @@ void StoreManagerLocintBlock::grow(size_t minGrow) {
 
     if (maxsize > std::numeric_limits<locint>::max()) {
       // encapsulate this error message
-      fprintf(DIAG_OUT,"\nADOL-C error:\n");
-      fprintf(DIAG_OUT,"maximal number (%u) of live active variables exceeded\n\n",
-           std::numeric_limits<locint>::max());
       adolc_exit(-3,"",__func__,__FILE__,__LINE__);
     }
 
@@ -1552,13 +1542,6 @@ void enableMinMaxUsingAbs() {
 
     if (!isTaping())
 	ADOLC_GLOBAL_TAPE_VARS.nominmaxFlag = 1;
-    else
-	fprintf(DIAG_OUT, "ADOL-C warning: "
-		"change from native Min/Max to using Abs during tracing "
-		"will lead to inconsistent results, not changing behaviour now\n"
-		"                "
-		"call %s before trace_on(tape_id) for the correct behaviour\n"
-		,__FUNCTION__);
 }
 
 void disableMinMaxUsingAbs() {
@@ -1567,13 +1550,6 @@ void disableMinMaxUsingAbs() {
 
     if (!isTaping())
 	ADOLC_GLOBAL_TAPE_VARS.nominmaxFlag = 0;
-    else
-	fprintf(DIAG_OUT, "ADOL-C warning: "
-		"change from native Min/Max to using Abs during tracing "
-		"will lead to inconsistent results, not changing behaviour now\n"
-		"                "
-		"call %s after trace_off() for the correct behaviour\n"
-		,__FUNCTION__);
 }
 
 class FatalError: public exception{

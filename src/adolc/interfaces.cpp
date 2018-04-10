@@ -163,7 +163,6 @@ int forward( short  tag,
             Y[k] = Y[k-1];
         Y[0] = y;
     } else {
-        fprintf(DIAG_OUT,"ADOL-C error: wrong Y dimension in forward \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
 
@@ -185,7 +184,6 @@ int forward( short  tag,
 { int rc = -1;
 
     if (d != 0) {
-        fprintf(DIAG_OUT,"ADOL-C error:  wrong X and Y dimensions in forward \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     } else
         rc = zos_forward(tag,m,n,keep,X,Y);
@@ -271,7 +269,6 @@ int reverse( short  tag,
 { int rc=-1;
 
     if (m != 1) {
-        fprintf(DIAG_OUT,"ADOL-C error:  wrong u dimension in scalar-reverse \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     } else
         rc = hos_reverse(tag,m,n,d,&u,Z);
@@ -291,7 +288,6 @@ int reverse( short  tag,
              double *Z)
 /* reverse(tag, m, n, 0, u[m], Z[n]), d=0                                   */
 { if (d != 0) {
-        fprintf(DIAG_OUT,"ADOL-C error:  wrong Z dimension in scalar-reverse \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
 
@@ -312,7 +308,6 @@ int reverse( short  tag,
 { int rc=-1;
 
     if (m != 1 || d != 0 ) {
-        fprintf(DIAG_OUT,"ADOL-C error:  wrong u or Z dimension in scalar-reverse \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     } else
         rc = fos_reverse(tag,m,n,&u,Z);
@@ -352,7 +347,6 @@ int reverse( short  tag,
 { int rc=-1;
 
     if (m != 1) {
-        fprintf(DIAG_OUT,"ADOL-C error:  wrong U dimension in vector-reverse \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     } else { /* olvo 980727 ??? */
         /* double** upp = new double*[nrows]; */
@@ -382,7 +376,6 @@ int reverse( short  tag,
 { int rc=-1;
 
     if (d != 0) {
-        fprintf(DIAG_OUT,"ADOL-C error:  wrong degree in vector-reverse \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     } else
         rc = fov_reverse(tag,m,n,q,U,Z);
@@ -429,7 +422,6 @@ int reverse( short  tag,
     /* (++d)--; *//* degre is reserved for the future use. Ingore this line */
 
     if ((m != 1) || (d != 0)) {
-        fprintf(DIAG_OUT,"ADOL-C error:  wrong U dimension in vector-reverse \n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     } else { /* olvo 980727 ??? */
         /* double ** upp = new double*[nrows]; */

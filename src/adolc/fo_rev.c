@@ -424,16 +424,6 @@ int int_reverse_safe(
 	ADOLC_OPENMP_THREAD_NUMBER;
     ADOLC_OPENMP_GET_THREAD_NUMBER;
 
-#if defined(ADOLC_DEBUG)
-    /****************************************************************************/
-    /*                                                           DEBUG MESSAGES */
-    fprintf(DIAG_OUT,"Call of %s(..) with tag: %d, n: %d, m %d,\n",
-            GENERATED_FILENAME, tnum, indep, depen);
-#ifdef _ADOLC_VECTOR_
-    fprintf(DIAG_OUT,"                    p: %d\n\n",nrows);
-#endif
-
-#endif
 
     /****************************************************************************/
     /*                                                                    INITs */
@@ -455,15 +445,9 @@ int int_reverse_safe(
 
 #if defined(_ABS_NORM_) || defined(_ABS_NORM_SIG_)
     if (! ADOLC_CURRENT_TAPE_INFOS.stats[NO_MIN_MAX] ) {
-	fprintf(DIAG_OUT, "ADOL-C error: Tape %d was not created compatible "
-		"with %s(..)\n              Please call enableMinMaxUsingAbs() "
-		"before trace_on(%d)\n", tnum, GENERATED_FILENAME, tnum);
 	adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
     else if (swchk != ADOLC_CURRENT_TAPE_INFOS.stats[NUM_SWITCHES]) {
-	fprintf(DIAG_OUT, "ADOL-C error: Number of switches passed %d does not "
-		"match with the one recorded on tape %d (%zu)\n",swchk,tnum,
-		ADOLC_CURRENT_TAPE_INFOS.stats[NUM_SWITCHES]);
 	adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
     else
@@ -559,8 +543,6 @@ int int_reverse_safe(
     taylor_back(tnum, &numdep, &numind, &taycheck);
 
     if (taycheck < 0) {
-        fprintf(DIAG_OUT,"\n ADOL-C error: reverse fails because it was not"
-                " preceded\nby a forward sweep with degree>0, keep=1!\n");
         adolc_exit(-2,"",__func__,__FILE__,__LINE__);
     };
 
@@ -2064,7 +2046,6 @@ int int_reverse_safe(
 #if !defined(_NTIGHT_)
 		    idx = (size_t)trunc(fabs(TARG));
 		    if (idx >= numval)
-			fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting n=%zu, idx=%zu\n", numval, idx);
 		    arg1 = vectorloc+idx;
 		    ASSIGN_A( Aarg1, ADJOINT_BUFFER[arg1])
 		    ASSIGN_A( Ares, ADJOINT_BUFFER[res])
@@ -2080,7 +2061,6 @@ int int_reverse_safe(
 		    }
 		    ADOLC_GET_TAYLOR(res);
 #else
-		    fprintf(DIAG_OUT, "ADOL-C error: active subscripting does not work in safe mode, please use tight mode\n");
 		    adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
 		}
@@ -2103,7 +2083,6 @@ int int_reverse_safe(
 #if !defined(_NTIGHT_)
 		    idx = (size_t)trunc(fabs(TARG));
 		    if (idx >= numval)
-			fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting (ref) n=%zu, idx=%zu\n", numval, idx);
 		    arg1 = (size_t)trunc(fabs(TRES));
 		    /*
 		     * This is actually NOP
@@ -2111,12 +2090,10 @@ int int_reverse_safe(
                      * so doing a check here is probably good
                      */
 		    if (arg1 != vectorloc+idx) {
-			fprintf(DIAG_OUT, "ADOL-C error: indexed active position does not match referenced position\nindexed = %zu, referenced = %d\n", vectorloc+idx, arg1);
 			adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 		    }
 		    ADOLC_GET_TAYLOR(res);
 #else
-		    fprintf(DIAG_OUT, "ADOL-C error: active subscripting does not work in safe mode, please use tight mode\n");
 		    adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
 		}
@@ -2142,7 +2119,6 @@ int int_reverse_safe(
 		}
 		ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif 
 		break;
@@ -2156,7 +2132,6 @@ int int_reverse_safe(
 		res = (size_t)trunc(fabs(TARG1));
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2179,7 +2154,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2202,7 +2176,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2224,7 +2197,6 @@ int int_reverse_safe(
 #endif
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2253,7 +2225,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2272,7 +2243,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 indexi--;
@@ -2287,7 +2257,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2302,7 +2271,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2327,7 +2295,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2341,7 +2308,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                break;
@@ -2356,7 +2322,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                break;
@@ -2380,7 +2345,6 @@ int int_reverse_safe(
 
                ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2401,7 +2365,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2423,7 +2386,6 @@ int int_reverse_safe(
 
                 ADOLC_GET_TAYLOR(res);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -2451,7 +2413,6 @@ int int_reverse_safe(
                 }
 #endif      
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
 		break;
@@ -2596,7 +2557,6 @@ int int_reverse_safe(
                                     MINDEC(ret_c,2);
                 }
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
 	        }
@@ -2637,7 +2597,6 @@ int int_reverse_safe(
                         if (ARES_INC)
                             MINDEC(ret_c,0);
 #else
-		fprintf(DIAG_OUT, "ADOL-C error: active vector element referencing does not work in safe mode, please use tight mode\n");
 		adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 #endif /* !_NTIGHT_ */
                 break;
@@ -3086,9 +3045,6 @@ int int_reverse_safe(
             default:                                                   /* default */
                 /*             Die here, we screwed up     */
 
-                fprintf(DIAG_OUT,"ADOL-C fatal error in " GENERATED_FILENAME " ("
-                        __FILE__
-                        ") : no such operation %d\n", operation);
                 adolc_exit(-1,"",__func__,__FILE__,__LINE__);
                 break;
         } /* endswitch */

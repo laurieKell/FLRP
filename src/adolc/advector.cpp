@@ -29,8 +29,6 @@ adubref::adubref( locint lo, locint ref ) {
     location = lo;
     refloc = (size_t)trunc(fabs(ADOLC_GLOBAL_TAPE_VARS.store[location]));
     if (ref != refloc) {
-	fprintf(DIAG_OUT,"ADOL-C error: strange construction of an active"
-		" vector subscript reference\n(passed ref = %d, stored refloc = %d)\n",ref,refloc);
 	adolc_exit(-2,"",__func__,__FILE__,__LINE__);
     }
     isInit = true;
@@ -430,7 +428,6 @@ adub advector::operator[](const badouble& index) const {
     }
 
     if (idx >= n)
-	fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting n=%zu, idx=%zu\n", n, idx);
 
     ADOLC_GLOBAL_TAPE_VARS.store[locat] = ADOLC_GLOBAL_TAPE_VARS.store[data[idx].loc()];
     return locat;
@@ -455,7 +452,6 @@ adubref advector::operator[](const badouble& index) {
     }
 
     if (idx >= n)
-	fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting (ref) n=%zu, idx=%zu\n", n, idx);
 
     ADOLC_GLOBAL_TAPE_VARS.store[locat] = data[idx].loc();
     return adubref(locat,data[idx].loc());
@@ -463,11 +459,9 @@ adubref advector::operator[](const badouble& index) {
 
 adouble advector::lookupindex(const badouble& x, const badouble& y) const {
     if (!nondecreasing()) {
-	fprintf(DIAG_OUT, "ADOL-C error: can only call lookup index if advector ist nondecreasing\n");
 	adolc_exit(-2,"",__func__,__FILE__,__LINE__);
     }
     if (y.value() < 0) {
-	fprintf(DIAG_OUT, "ADOL-C error: index lookup needs a nonnegative denominator\n");
 	adolc_exit(-2,"",__func__,__FILE__,__LINE__);
     }
     adouble r = 0;

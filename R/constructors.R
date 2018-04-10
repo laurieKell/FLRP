@@ -330,12 +330,6 @@ setGeneric('pa<-', function(object,value)
 setGeneric('obs<-', function(object,value)
   standardGeneric('obs<-'))
 
-setGeneric('stock.obs<-', function(object,value)
-  standardGeneric('stock.obs<-'))
- 
-setMethod("stock.obs<-", signature(object="FLBRP", value="FLQuant"),
-  function(object, value) object@stock.obs=value)
-  
 setObs=function(x,df) {
   
   flq              =FLQuant(NA,dimnames=list(year=df$year))
@@ -356,6 +350,3 @@ setMethod("pa<-", signature(object="FLBRP", value="data.frame"),
  
 setMethod("obs<-", signature(object="FLBRP", value="data.frame"),
   function(object, value) setObs(object,value))
- 
-#setRPs(brps[[1]],dbICES$pa[1,])
-

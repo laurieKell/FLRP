@@ -427,22 +427,6 @@ int hov_ti_reverse(
     ADOLC_OPENMP_THREAD_NUMBER;
     ADOLC_OPENMP_GET_THREAD_NUMBER;
 
-#if defined(ADOLC_DEBUG)
-    /************************************************************************/
-    /*                                                       DEBUG MESSAGES */
-    fprintf(DIAG_OUT,"Call of %s(..) with tag: %d, n: %d, m %d,\n",
-            GENERATED_FILENAME, tnum, indep, depen);
-
-#ifdef _HIGHER_ORDER_
-    fprintf(DIAG_OUT,"                    degree: %d\n",degre);
-#endif
-#ifdef _ADOLC_VECTOR_
-    fprintf(DIAG_OUT,"                    p: %d\n\n",nrows);
-#endif
-
-#endif
-
-
     /************************************************************************/
     /*                                                                INITs */
 
@@ -556,17 +540,10 @@ int hov_ti_reverse(
     taylor_back(tnum,&numdep,&numind,&taycheck);
 
     if(taycheck != degre) {
-        fprintf(DIAG_OUT,"\n ADOL-C error: reverse fails because it was not"
-                " preceded\nby a forward sweep with degree>%i,"
-                " keep=%i!\n",degre,degre+1);
         adolc_exit(-2,"",__func__,__FILE__,__LINE__);
     };
 
     if((numdep != depen)||(numind != indep)) {
-        fprintf(DIAG_OUT,"\n ADOL-C error: reverse fails on tape %d because "
-                "the number of\nindependent and/or dependent variables"
-                " given to reverse are\ninconsistent with that of the"
-                "  internal taylor array.\n",tnum);
         adolc_exit(-2,"",__func__,__FILE__,__LINE__);
     }
 
@@ -1966,7 +1943,6 @@ int hov_ti_reverse(
 
 #ifdef _HOS_OV_
 
-                fprintf(DIAG_OUT," operation min_op not implemented for hos_ov");
                 break;
 #endif
                 res   = get_locint_r();
@@ -2370,7 +2346,6 @@ int hov_ti_reverse(
 		    ASSIGN_T(Targ, rpp_T[arg])
 		    idx = (size_t)trunc(fabs(TARG));
 		    if (idx >= numval)
-			fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting n=%zu, idx=%zu\n", numval, idx);
 		    arg1 = vectorloc+idx;
 		    ASSIGN_A(Aarg1, rpp_A[arg1])
 		    ASSIGN_A(Ares, rpp_A[res])
@@ -2405,7 +2380,6 @@ int hov_ti_reverse(
 		    ASSIGN_T(Tres, rpp_T[res])
 		    idx = (size_t)trunc(fabs(TARG));
 		    if (idx >= numval)
-			fprintf(DIAG_OUT, "ADOL-C warning: index out of bounds while subscripting (ref) n=%zu, idx=%zu\n", numval, idx);
 		    arg1 = (size_t)trunc(fabs(TRES));
 		    /*
 		     * This is actually NOP
@@ -2413,7 +2387,6 @@ int hov_ti_reverse(
                      * so doing a check here is probably good
                      */
 		    if (arg1 != vectorloc+idx) {
-			fprintf(DIAG_OUT, "ADOL-C error: indexed active position does not match referenced position\nindexed = %zu, referenced = %d\n", vectorloc+idx, arg1);
 			adolc_exit(-2,"",__func__,__FILE__,__LINE__);
 		    }
 		    GET_TAYL(res,k,p)
@@ -3018,9 +2991,6 @@ int hov_ti_reverse(
             default:                                                   /* default */
                 /*             Die here, we screwed up     */
 
-                fprintf(DIAG_OUT,"ADOL-C fatal error in " GENERATED_FILENAME " ("
-                        __FILE__
-                        ") : no such operation %d\n", operation);
                 adolc_exit(-1,"",__func__,__FILE__,__LINE__);
                 break;
         } /* endswitch */
@@ -3031,14 +3001,6 @@ int hov_ti_reverse(
         ++countPerOperation[operation];
 #endif /* ADOLC_DEBUG */
     }
-
-#if defined(ADOLC_DEBUG)
-    printf("\nTape contains:\n");
-    for (v = 0; v < 256; ++v)
-        if (countPerOperation[v] > 0)
-            printf("operation %3d: %6d time(s) - %6d taylors read (%10.2f per operation)\n", v, countPerOperation[v], taylorPerOperation[v], (double)taylorPerOperation[v] / (double)countPerOperation[v]);
-    printf("\n");
-#endif /* ADOLC_DEBUG */
 
     /* clean up */
     free((char*)*rpp_T);

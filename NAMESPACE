@@ -46,6 +46,30 @@ importFrom("utils",
 exportClasses(
   "FLBRP",
   "FLBRPs")
+export(
+  "availability",
+  "availability<-",
+  "bycatch.harvest",
+  "bycatch.harvest<-",
+  "bycatch.wt",
+  "bycatch.wt<-",
+  "discards.obs",
+  "discards.obs<-",
+  "fbar<-",
+  "fbar.obs",
+  "fbar.obs<-",
+  "landings.obs",
+  "landings.obs<-",
+  "profit.obs",
+  "profit.obs<-",
+  "rec.obs<-",
+  "refpts",
+  "refpts<-",
+  "ssb.obs",
+  "ssb.obs<-",
+  "stock.obs",
+  "stock.obs<-"
+)
 exportMethods(
   "availability",
   "availability<-",
@@ -89,6 +113,7 @@ exportMethods(
   "refpts<-",
   "ssb.obs",
   "ssb.obs<-",
+  "stock",
   "stock.obs",
   "stock.obs<-",
   "stock.wt",

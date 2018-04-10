@@ -47,7 +47,7 @@ createFLAccesors <- function(class, exclude=character(1), include=missing) {
     eval(
     substitute(setReplaceMethod(x, signature(object=y, value=v),
       function(object, value)
-      {slot(object, s) <- value; if(validObject(object)) object else
+      {slot(object, s) <- value; if(validObject(object)) return(object) else
         stop("Object not valid")}),
       list(x=x, y=class, s=x, v=unname(slots[x])))
     )

@@ -41,9 +41,6 @@ pdouble::pdouble(locint idx) {
         _val = ADOLC_GLOBAL_TAPE_VARS.pStore[idx];
         _idx = idx;
     } else {
-        fprintf(DIAG_OUT, "ADOL-C error: Parameter index %d out of bounds, "
-                "# existing parameters = %zu\n", idx, 
-                ADOLC_GLOBAL_TAPE_VARS.numparam);
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
 }
@@ -74,8 +71,6 @@ locint mkparam_idx(double pval) {
         _idx = ADOLC_GLOBAL_TAPE_VARS.paramStoreMgrPtr->next_loc();
         ADOLC_GLOBAL_TAPE_VARS.pStore[_idx] = pval;
     } else {
-        fprintf(DIAG_OUT, "ADOL-C error: cannot define indexed parameter "
-                "while tracing is turned off!\n");
         adolc_exit(-1,"",__func__,__FILE__,__LINE__);
     }
     return _idx;
@@ -394,12 +389,6 @@ adouble pow( const pdouble& p, const badouble& y) {
     adouble a1, a2, ret;
     double vx = p._val;
     double vy = y.getValue();
-    if (!(vx > 0)) { 
-        if (vx < 0 || vy >= 0)
-            fprintf(DIAG_OUT,"\nADOL-C message: exponent of zero/negative basis deactivated\n");
-        else
-            fprintf(DIAG_OUT,"\nADOL-C message: negative exponent and zero basis deactivated\n");
-    }
     condassign(a1, -y, (adouble) ADOLC_MATH_NSP::pow(vx,vy), pow(p,vy));
     condassign(a2, fabs(adub(p)), pow(p, vy), a1);
     condassign(ret, p, exp(y*log(adub(p))),a2);

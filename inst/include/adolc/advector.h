@@ -50,28 +50,18 @@ protected:
     locint refloc;
     explicit adubref( locint lo, locint ref );
     explicit adubref( void ) {
-        fprintf(DIAG_OUT,"ADOL-C error: illegal default construction of adubref"
-                " variable\n");
         exit(-2);
     }
     explicit adubref( double ) {
-        fprintf(DIAG_OUT,"ADOL-C error: illegal  construction of adubref"
-		" variable from double\n");
         exit(-2);
     }
     explicit adubref( const badouble& ) {
-        fprintf(DIAG_OUT,"ADOL-C error: illegal  construction of adubref"
-		" variable from badouble\n");
         exit(-2);
     }
     explicit adubref( const adub& ) {
-        fprintf(DIAG_OUT,"ADOL-C error: illegal  construction of adubref"
-		" variable from adub\n");
         exit(-2);
     }
     adubref( const adubref& ) {
-        fprintf(DIAG_OUT,"ADOL-C error: illegal copy construction of adubref"
-               " variable\n");
         exit(-2);
     }
     bool isInit;  // marker if the badouble is properly initialized

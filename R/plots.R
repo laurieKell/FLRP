@@ -1,5 +1,5 @@
 # plots.R - DESC
-# /plots.R
+# FLRP/R/plots.R
 
 # Copyright European Union, 2017
 # Author: Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>

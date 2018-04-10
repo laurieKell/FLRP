@@ -1,5 +1,5 @@
 # methods.R - DESC
-# /methods.R
+# FLRP/R/methods.R
 
 # Copyright FLR Team, 2017
 # Authors: Laurie Kell <laurie@seaplusplus.co.uk>
@@ -169,6 +169,12 @@ setMethod('biomass.obs', signature(object='FLBRP'),
 setMethod('yield.obs', signature(object='FLBRP'),
   function(object) {
     return(landings.obs(object))
+  }) # }}}
+
+# stock {{{
+setMethod('stock', signature(object='FLBRP'),
+  function(object) {
+		return(quantSums(stock.n(object) %*% stock.wt(object)))
   }) # }}}
 
 # rec {{{
