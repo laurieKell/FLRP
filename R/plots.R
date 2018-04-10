@@ -7,21 +7,35 @@
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
 # plot(FLBRP) {{{
+
+#' @examples
+#' data(ple4brp)
+#' plot(ple4brp)
+#' # ADD observations
+#' plot(ple4brp, obs=TRUE)
+#' # SELECT which refpts to plot
+#' plot(ple4brp, refpts=c("msy", "crash", "f0.1"))
+#' # method will only plot existing referenced points
+#' refpts(ple4brp) <- refpts(ple4brp)[c("msy", "fmax", "spr.30"),]
+#' plot(ple4brp)
+
 setMethod("plot", signature("FLBRP", "missing"),
-  function(x, refpts=c("msy", "mey", "f0.1", "spr.30"), obs=FALSE, ...) {
+  function(x, refpts=c("msy", "mey", "f0.1", "spr.30", "fmax","crash"),
+    obs=FALSE, ...) {
 
     # EXTRACT metrics
     df <- model.frame(metrics(x,
       list(ssb=ssb, harvest=fbar, rec=rec, yield=landings, profit=profit)), drop=TRUE)
 
     # refpts
-    rps <- refpts(x)
+    drps <- dimnames(refpts(x))$refpt
+    rps <- refpts(x)[drps %in% refpts,]
 
     # estimated?
     rpf <- !all(is.na(rps))
 
     # SUBSET df IF rpf
-    if(rpf)
+    if(rpf && "crash" %in% dimnames(rps)$refpt)
       df <- df[df$harvest <= c(rps['crash', 'harvest']),]
 
     # NO economics
@@ -53,7 +67,7 @@ setMethod("plot", signature("FLBRP", "missing"),
     # PLOT
     p <- ggplot(dat, aes_(x=~x, y=~y)) + geom_line() +
       facet_wrap(~panel, scales="free", ncol=2) +
-      xlab("") + ylab("")
+      xlab("") + ylab("") + ylim(c(0, NA)) + xlim(c(0, NA))
 
     # PLOT refpts
     if(rpf) {
