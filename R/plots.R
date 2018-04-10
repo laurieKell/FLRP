@@ -11,20 +11,20 @@
 #' @title plot method for FLBRP class
 #' 
 #' @description
-#' The plot method for the `FLBRP` class will show the relationships between
-#' equilibrium SSB, Yield and Profit against levels of fishing
-#' mortality and of recruitment, Yield and profit against SSB.
+#' The plot method for the `FLBRP` class will show the relationship between
+#' equilibrium SSB, Yield and Profit against levels of fishing mortality and
+#' that of recruitment, Yield and profit against SSB.
 #' 
 #' @param x An object of class `FLBRP`
 #' @param refpts Reference points to include, defaults to all in standard `refpts` slot bu `virgin`. A vector of class `character`
 #' @param obs Should observations be plotted? Defaults to `FALSE`.
 #' 
-#' @return An object of class [ggplot2::gg]
+#' @return An object of class [ggplot2][gg].
 #' 
 #' @docType methods
 #' @rdname brp
 #' 
-#' @seealso [FLBRP] 
+#' @seealso [FLBRP]
 #'
 
 #' @examples
@@ -86,7 +86,8 @@ setMethod("plot", signature("FLBRP", "missing"),
     # PLOT
     p <- ggplot(dat, aes_(x=~x, y=~y)) + geom_line() +
       facet_wrap(~panel, scales="free", ncol=2) +
-      xlab("") + ylab("") + ylim(c(0, NA)) + xlim(c(0, NA))
+      xlab("") + ylab("") + 
+      scale_x_continuous(labels=human_numbers, limits=c(0,NA))
 
     # PLOT refpts
     if(rpf) {

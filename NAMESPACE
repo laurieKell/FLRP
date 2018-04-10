@@ -65,6 +65,7 @@ export(
   "rec.obs<-",
   "refpts",
   "refpts<-",
+  "spr",
   "ssb.obs",
   "ssb.obs<-",
   "stock.obs",
