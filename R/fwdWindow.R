@@ -40,24 +40,24 @@ setMethod("fwdWindow", signature(x="FLStock", y="FLBRP"),
     res <- window(x, end=end, extend=TRUE, frequency=1)
 
     # NEW window years
-    wyrs <- setdiff(dimnames(m(res))$year, dimnames(m(x))$year)
+    wyrs <- seq(dim(m(x))[2], dim(m(res))[2])
       
     # CHECKS
+    its <- unlist(lapply(qapply(x, dim), '[', 6))
 
     # COMPLETE *.wt, landings.n, discards.n, mat, m, harvest, *.spwn
     slts <- c("stock.wt", "landings.wt", "discards.wt", "catch.wt",
        "m", "mat", "harvest.spwn", "m.spwn")
 
     for(s in slts) {
-      slot(res, s)[,wyrs] <- do.call(s, list(y))
+      slot(res, s)[,wyrs] <- iter(do.call(s, list(y)), seq(its[s]))
     }
 
-    # COMPLETE landings.n, discards.n, harvest, any year will do
+    # COMPLETE landings.n, discards.n, harvest, any year > 1 will do
+    landings.n(res)[,wyrs] <- iter(landings.n(y)[,3], seq(its["landings.n"]))
+    discards.n(res)[,wyrs] <- iter(discards.n(y)[,3], seq(its["discards.n"]))
+    harvest(res)[,wyrs] <- iter(harvest(y)[,3], seq(its["discards.n"]))
     
-    landings.n(res)[,wyrs] <- landings.n(y)[,3]
-    discards.n(res)[,wyrs] <- discards.n(y)[,3]
-    harvest(res)[,wyrs] <- harvest(y)[,3]
-
     return(res)
   }
 ) # }}}

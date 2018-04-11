@@ -186,15 +186,16 @@ setMethod('rec', signature(object='FLBRP'),
 # harvest {{{
 setMethod("harvest", signature(object="FLBRP", catch="missing"),
 	function(object){
+    
     # selectivity
-    sel<-expand(landings.sel(object) + discards.sel(object),year=dims(discards.sel(object))$minyear+(1:dim(fbar(object))[2])-1)
-    dmns<-dimnames(sel)
-    dmns$year<-dimnames(fbar(object))$year
-    sel<-FLQuant(sel,dimnames=dmns)
+    sel <- expand(landings.sel(object) + discards.sel(object),
+      year=dims(discards.sel(object))$minyear+(1:dim(fbar(object))[2]) - 1)
+    dmns <- dimnames(sel)
+    dmns$year <- dimnames(fbar(object))$year
+    sel <- FLQuant(sel, dimnames=dmns)
     
     sel[,] <- sel[,1]
-    sel <- sweep(sel, 2:6, fbar(object), '*')
-    units(sel) <- 'f'
+    sel <- sel %*% fbar(object)
     
     return(sel)
   }) # }}}
