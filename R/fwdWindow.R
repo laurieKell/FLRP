@@ -40,7 +40,7 @@ setMethod("fwdWindow", signature(x="FLStock", y="FLBRP"),
     res <- window(x, end=end, extend=TRUE, frequency=1)
 
     # NEW window years
-    wyrs <- seq(dim(m(x))[2], dim(m(res))[2])
+    wyrs <- seq(dim(m(x))[2] + 1, dim(m(res))[2])
       
     # CHECKS
     its <- unlist(lapply(qapply(x, dim), '[', 6))
