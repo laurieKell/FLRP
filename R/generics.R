@@ -57,8 +57,6 @@ setGeneric("profit.obs<-", function(object, ..., value)
 setGeneric("rec.obs<-", function(object, ..., value)
 		standardGeneric("rec.obs<-"))
 
-setGeneric("refpts", function(object, ...)
-		standardGeneric("refpts"))
 setGeneric("refpts<-", function(object, ..., value)
 		standardGeneric("refpts<-"))
 
@@ -83,9 +81,6 @@ setGeneric("brp", function(object, ...)
 
 setGeneric("catch.obs", function(object, ...)
 		standardGeneric("catch.obs"))
-
-setGeneric("fwdWindow", function(x, y, ...)
-    standardGeneric("fwdWindow"))
 
 setGeneric("hcrYield", function(object, fbar, ...)
 		standardGeneric("hcrYield"))
