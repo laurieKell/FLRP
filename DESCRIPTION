@@ -19,7 +19,8 @@ Imports:
   methods,
   ggplotFL
 Suggests:
-  knitr
+  knitr,
+  glmnet
 Collate:
   classes.R
   generics.R

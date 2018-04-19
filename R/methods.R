@@ -427,3 +427,15 @@ setMethod('sp', signature(stock='FLBRP', catch='missing'),
 	function(stock, rel=TRUE)
     return(sp(ssb.obs(stock), catch.obs(stock), rel=rel)))
 # }}}
+
+# computeRefpts {{{
+
+#' @rdname brp
+#' @description To directly obtain the recalculated `refpts` slot of an `FLBRP` object, the
+#' `computeRefpts` method can be used. This is equivalent to *fitting* the object
+#' using `brp` and then extracting the `@refpts` slot.
+
+setMethod('computeRefpts', signature(object='FLBRP'), function(object){
+	refpts(brp(object))})
+
+# }}}

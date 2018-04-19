@@ -82,6 +82,9 @@ setGeneric("brp", function(object, ...)
 setGeneric("catch.obs", function(object, ...)
 		standardGeneric("catch.obs"))
 
+setGeneric("computeRefpts", function(object, ...)
+		standardGeneric("computeRefpts"))
+
 setGeneric("hcrYield", function(object, fbar, ...)
 		standardGeneric("hcrYield"))
 
