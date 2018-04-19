@@ -434,6 +434,9 @@ setMethod('sp', signature(stock='FLBRP', catch='missing'),
 #' @description To directly obtain the recalculated `refpts` slot of an `FLBRP` object, the
 #' `computeRefpts` method can be used. This is equivalent to *fitting* the object
 #' using `brp` and then extracting the `@refpts` slot.
+#' @examples
+#' m(ple4brp)[1:3,] <- 0.2
+#' computeRefpts(ple4brp)
 
 setMethod('computeRefpts', signature(object='FLBRP'), function(object){
 	refpts(brp(object))})

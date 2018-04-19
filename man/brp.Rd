@@ -46,6 +46,8 @@ data(ple4brp)
 
 ple4brp <- brp(ple4brp)
 refpts(ple4brp)
+m(ple4brp)[1:3,] <- 0.2
+computeRefpts(ple4brp)
 data(ple4brp)
 plot(ple4brp)
 # ADD observations

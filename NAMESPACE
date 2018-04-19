@@ -54,6 +54,7 @@ exportMethods(
   "bycatch.harvest<-",
   "bycatch.wt",
   "bycatch.wt<-",
+  "computeRefpts",
   "discards.obs",
   "discards.obs<-",
   "discards.sel",
